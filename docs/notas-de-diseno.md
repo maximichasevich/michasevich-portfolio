@@ -1,6 +1,6 @@
 # Notas de diseño (historial)
 
-> Historial de decisiones mientras el proyecto era un solo sitio. Las rutas `/proyectos/...` mencionadas acá ahora son los sitios `demo-*` independientes; ver el README de la raíz.
+> Historial de decisiones mientras el proyecto era un solo sitio. Las rutas `/proyectos/...` mencionadas acá ahora son los sitios `demo-*` independientes; cada demo tiene su propio repositorio.
 
 
 De las tres propuestas iniciales (Titular, Afiche y Órbita) quedó **Órbita**,

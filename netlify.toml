@@ -1,5 +1,5 @@
 # Configuración de Netlify para este proyecto.
-# En Netlify, la "Base directory" es el nombre de esta carpeta.
+# El sitio se compila desde la raíz de este repositorio.
 
 [build]
   command = "npm run build"

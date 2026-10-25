@@ -1,72 +1,129 @@
-# Portfolio
+# Maximiliano Michasevich · Portfolio
 
-Mi página principal para vender servicios de diseño y desarrollo web.
-Estilo futurista nocturno con globo 3D interactivo, modelos 3D en CSS,
-carrusel de ejemplos, cómo trabajo, servicios y precios, preguntas
-frecuentes y formulario de contacto que guarda los mensajes en Supabase.
+Mi página principal como diseñador y desarrollador web en Montevideo, Uruguay.
+Muestra mis servicios, precios, proyectos de ejemplo y un formulario de
+contacto que guarda los mensajes en una base de datos.
 
-## Correrlo en tu computadora
+**Versión publicada:** [michasevich.com](https://michasevich.com)
+
+## Tecnologías
+
+- [Next.js 16](https://nextjs.org) con App Router y acciones de servidor
+- React 19 y TypeScript
+- Tailwind CSS 4, componentes de shadcn/ui y Radix
+- Motion para animaciones y cobe para el globo 3D en WebGL
+- [Supabase](https://supabase.com) (PostgreSQL) para los mensajes de contacto
+- Publicado en [Netlify](https://www.netlify.com)
+
+## Funcionalidades principales
+
+- **Portada futurista** con globo 3D interactivo y modelos 3D hechos en CSS.
+- **Carrusel de proyectos** con capturas de escritorio y celular, y enlace a cada demo publicada.
+- **Servicios y precios** por paquete, con servicios extra y preguntas frecuentes.
+- **Cómo trabajo:** las etapas de un proyecto, de la primera charla a la publicación.
+- **Formulario de contacto** que guarda en Supabase, con validación en el servidor y protección contra spam: campo trampa, tiempo mínimo y límite de envíos por hora.
+- **Contacto directo** por WhatsApp con el mensaje ya armado según el paquete elegido.
+- **Traducción** a otros idiomas con el traductor de Google.
+- **Seguridad:** encabezados CSP, HSTS y otros, y una tabla que la página solo puede escribir, nunca leer.
+- **Accesible y rápida:** pensada primero para celular y respeta la preferencia de "reducir movimiento".
+
+## Proyectos de ejemplo
+
+| Proyecto | Repositorio | Publicado |
+|---|---|---|
+| La Espiga, panadería de barrio | [demo-la-espiga](https://github.com/maximichasevich/demo-la-espiga) | [laespiga.michasevich.com](https://laespiga.michasevich.com) |
+| Estudio Faro, estudio de arquitectura | [demo-estudio-faro](https://github.com/maximichasevich/demo-estudio-faro) | [estudiofaro.michasevich.com](https://estudiofaro.michasevich.com) |
+| Verde Tienda, tienda online de plantas | [demo-verde-tienda](https://github.com/maximichasevich/demo-verde-tienda) | [verdetienda.michasevich.com](https://verdetienda.michasevich.com) |
+
+## Cómo correrlo en local
+
+Necesitás [Node.js](https://nodejs.org) 20.9 o más nuevo. Recomiendo la versión 22.
 
 ```bash
+git clone https://github.com/maximichasevich/michasevich-portfolio.git
+cd michasevich-portfolio
 npm install
-cp .env.example .env.local   # y completá las claves de Supabase
+cp .env.example .env.local   # completá las claves de Supabase
 npm run dev                  # http://localhost:3000
 ```
 
-Sin las claves de Supabase la página funciona igual. Solo el formulario
-muestra un aviso y ofrece WhatsApp o correo.
+Sin las claves de Supabase la página funciona igual. El formulario muestra un
+aviso y ofrece WhatsApp o correo.
 
-Para ver la velocidad real del sitio publicado:
+Otros comandos:
 
 ```bash
-npm run build
-npm start
+npm run build && npm start   # versión optimizada
+npm run lint                 # revisión de código
+npm run typecheck            # revisión de tipos
 ```
-
-Otros comandos: `npm run lint` (revisión de código) y `npm run typecheck`.
-
-## Dónde se cambia cada cosa
-
-| Qué | Archivo |
-|---|---|
-| Nombre, correo, WhatsApp, textos de servicios, razones y preguntas | `data/perfil.ts` |
-| Paquetes, precios y servicios extra | `data/precios.ts` |
-| Etapas de "Cómo trabajo" y ejemplos del carrusel | `data/trabajo.ts` |
-| Tarjetas de proyectos | `data/proyectos.ts` |
-| **Direcciones de las demos y del portfolio** | `config/sitios.ts` (o variables de entorno) |
-| Capturas del carrusel y de las tarjetas | `public/portfolio/` y `public/proyectos/` |
-
-Si reemplazás una imagen, usá un nombre de archivo nuevo. Next.js y el
-navegador guardan copias según el nombre y seguirían mostrando la anterior.
 
 ## Variables de entorno
 
-Están listadas en `.env.example`. En tu computadora van en `.env.local`,
-que nunca se sube a git. En Netlify se cargan en *Site configuration >
+Están listadas en `.env.example`. En tu computadora van en `.env.local`, que
+nunca se sube a git. En Netlify se cargan en *Site configuration >
 Environment variables*.
 
 | Variable | Para qué |
 |---|---|
 | `SUPABASE_URL` | Dirección del proyecto de Supabase |
-| `SUPABASE_ANON_KEY` | Clave pública (anon o publishable) de Supabase |
+| `SUPABASE_ANON_KEY` | Clave pública de Supabase |
 | `MENSAJES_SAL` | Texto secreto al azar para la huella anónima del límite de envíos |
-| `NEXT_PUBLIC_SITE_URL` | Dirección pública del portfolio, por ejemplo tu dominio |
-| `NEXT_PUBLIC_DEMO_*_URL` | Direcciones publicadas de las tres demos |
+| `SUPABASE_DB_PASSWORD` | Solo para la CLI de Supabase en tu computadora |
+| `NEXT_PUBLIC_SITE_URL` | Dirección pública del portfolio (opcional) |
+| `NEXT_PUBLIC_DEMO_*_URL` | Direcciones de las tres demos (opcional) |
 
-## Formulario de contacto
+## Base de datos
 
-- **Dónde se guarda:** en la tabla `mensajes` de Supabase. El código para crearla está en `../supabase/migrations/`.
-- **Cómo se guarda:** desde el servidor, con la acción de `app/acciones/contacto.ts`. Valida los datos y frena robots con un campo trampa invisible, un tiempo mínimo de 3 segundos y un límite de 5 mensajes por hora por visitante (100 por hora en total).
-- **Seguridad:** la tabla solo permite insertar mensajes con la clave pública. Los mensajes se leen únicamente desde el panel de Supabase.
+La tabla `mensajes` se crea con la migración de `supabase/migrations/`:
+
+```bash
+npx supabase link --project-ref <tu-proyecto>
+npx supabase db push
+```
+
+La clave pública solo puede insertar mensajes. Hay un límite de 5 mensajes
+por hora por visitante y 100 por hora en total. La IP no se guarda: se usa
+una huella SHA-256 con una sal secreta.
+
+## Dónde se cambia cada cosa
+
+| Qué | Archivo |
+|---|---|
+| Nombre, correo, WhatsApp, textos y preguntas | `data/perfil.ts` |
+| Paquetes, precios y servicios extra | `data/precios.ts` |
+| Etapas de trabajo y ejemplos del carrusel | `data/trabajo.ts` |
+| Direcciones del portfolio y las demos | `config/sitios.ts` |
+| Imágenes | `public/` |
 
 ## Estructura
 
 ```
-app/            Páginas, metadatos (sitemap, robots, imagen para redes) y acciones
-components/     Secciones de la portada (inicio/), componentes de UI e idioma
+app/            Páginas, metadatos y acciones de servidor
+components/     Secciones de la portada y componentes de interfaz
 config/         Direcciones de los sitios
 data/           Textos, precios y datos editables
 hooks/          Hooks reutilizables
 lib/            Utilidades y cliente de Supabase
 public/         Imágenes
+supabase/       Configuración y migraciones de la base de datos
+docs/           Notas de diseño
 ```
+
+## Contacto
+
+[michasevich.com](https://michasevich.com) · contacto@michasevich.com
+
+---
+
+## English
+
+**Maximiliano Michasevich · Portfolio.** Personal site of a web designer and
+developer based in Montevideo, Uruguay. It presents services, pricing, three
+live demo projects and a contact form backed by Supabase.
+
+- **Live site:** [michasevich.com](https://michasevich.com)
+- **Stack:** Next.js 16, React 19, TypeScript, Tailwind CSS 4, Supabase, Netlify.
+- **Highlights:** interactive 3D globe and CSS 3D models, a server-validated contact form with spam protection and rate limiting, security headers, and a mobile-first, accessible design.
+- **Run locally:** `npm install`, copy `.env.example` to `.env.local`, then `npm run dev`.
+- **Contact:** contacto@michasevich.com

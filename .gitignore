@@ -1,0 +1,28 @@
+# Dependencias y compilaciones
+node_modules/
+.next/
+out/
+build/
+coverage/
+.netlify/
+*.tsbuildinfo
+next-env.d.ts
+
+# Variables de entorno: nunca se suben. Sí se sube .env.example.
+.env*
+!.env.example
+
+# Registros de npm
+npm-debug.log*
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.pem
+
+# Configuración local de Claude Code (propia de cada computadora)
+.claude/settings.local.json
+
+# Archivos temporales de la CLI de Supabase
+supabase/.temp/
+supabase/.branches/
