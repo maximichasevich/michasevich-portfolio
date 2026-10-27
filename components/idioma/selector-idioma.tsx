@@ -146,7 +146,7 @@ export function SelectorIdioma({
   return (
     <DropdownMenu.Root modal={false}>
       <DropdownMenu.Trigger
-        aria-label={`Idioma: ${idiomas.find((i) => i.codigo === actual)?.nombre ?? actual}. Cambiar idioma`}
+        aria-label={`${etiqueta} · Idioma: ${idiomas.find((i) => i.codigo === actual)?.nombre ?? actual}. Cambiar idioma`}
         className={cn(
           "notranslate inline-flex items-center gap-1.5 rounded-full font-semibold focus-visible:ring-2 focus-visible:ring-current focus-visible:outline-none",
           variante === "barra"

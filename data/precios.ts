@@ -73,6 +73,11 @@ export type Extra = {
 
 export const extras: Extra[] = [
   {
+    nombre: "Sistema de turnos online",
+    detalle: "Tus clientes reservan solos. Más US$20 por mes.",
+    desde: 300,
+  },
+  {
     nombre: "Mantenimiento mensual",
     detalle: "Cambios de textos, fotos y precios.",
     desde: 25,

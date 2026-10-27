@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Rocket, ShoppingCart, Store } from "lucide-react"
 
 import { TextoAnimado } from "@/components/idioma/texto-animado"
@@ -8,7 +9,9 @@ import { BlurFade } from "@/components/ui/blur-fade"
 import { ShineBorder } from "@/components/ui/shine-border"
 import { Inclinable } from "@/components/inicio/interacciones"
 import { CuboCapacidades } from "@/components/inicio/modelos-3d"
+import { MontarCerca } from "@/components/inicio/montar-cerca"
 import { servicios } from "@/data/perfil"
+import { rutasRubros, rutasServicios } from "@/lib/rutas"
 
 const paletas = [
   ["#7c5cff", "#a28cff", "#39d5ff"],
@@ -47,7 +50,12 @@ export function Servicios() {
             </p>
           </div>
           {/* Modelo 3D: cubo con lo que incluye cada página. */}
-          <CuboCapacidades className="md:mr-10" />
+          <MontarCerca
+            oculto={false}
+            className="mx-auto h-[190px] w-[150px] md:mr-10 md:h-[210px] md:w-[170px]"
+          >
+            <CuboCapacidades />
+          </MontarCerca>
         </div>
 
         <ul className="mt-14 grid gap-5 md:grid-cols-3">
@@ -55,6 +63,7 @@ export function Servicios() {
             const Icono = iconos[i % iconos.length]
             return (
               <BlurFade
+                as="li"
                 key={s.titulo}
                 inView
                 delay={0.1 + i * 0.12}
@@ -62,7 +71,7 @@ export function Servicios() {
                 offset={18}
                 className="min-w-0"
               >
-                <li className="h-full">
+                <div className="h-full">
                   <Inclinable className="h-full" grados={7}>
                     <PixelCard
                       colors={paletas[i % paletas.length]}
@@ -107,11 +116,49 @@ export function Servicios() {
                       </div>
                     </PixelCard>
                   </Inclinable>
-                </li>
+                </div>
               </BlurFade>
             )
           })}
         </ul>
+
+        {/* Una página por servicio y por rubro, con más detalle. */}
+        <div className="mt-12 grid gap-6 md:grid-cols-2">
+          <nav aria-labelledby="mas-servicios">
+            <p id="mas-servicios" className="etiqueta-hud mb-4">
+              Cada servicio en detalle
+            </p>
+            <ul className="flex flex-wrap gap-2">
+              {rutasServicios.map((r) => (
+                <li key={r.ruta}>
+                  <Link
+                    href={r.ruta}
+                    className="boton-fantasma inline-flex min-h-10 items-center rounded-full px-4 py-2 text-sm"
+                  >
+                    {r.nombre}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <nav aria-labelledby="mas-rubros">
+            <p id="mas-rubros" className="etiqueta-hud mb-4">
+              Según tu rubro
+            </p>
+            <ul className="flex flex-wrap gap-2">
+              {rutasRubros.map((r) => (
+                <li key={r.ruta}>
+                  <Link
+                    href={r.ruta}
+                    className="boton-fantasma inline-flex min-h-10 items-center rounded-full px-4 py-2 text-sm"
+                  >
+                    {r.nombre}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        </div>
       </div>
     </section>
   )

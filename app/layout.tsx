@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next"
 import { Geist } from "next/font/google"
 
 import "./globals.css"
+import "./inicio.css"
 import { cn } from "@/lib/utils"
 import { fuentesInicio } from "@/components/inicio/fuentes"
 import { WhatsappFlotante } from "@/components/whatsapp-flotante"

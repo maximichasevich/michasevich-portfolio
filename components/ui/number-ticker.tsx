@@ -23,7 +23,11 @@ export function NumberTicker({
   ...props
 }: NumberTickerProps) {
   const ref = useRef<HTMLSpanElement>(null)
-  const motionValue = useMotionValue(direction === "down" ? value : startValue)
+  // El HTML del servidor muestra el número final (lo leen Google y quien
+  // navega sin JavaScript). La cuenta animada solo corre si el número
+  // todavía no está en pantalla al cargar, así no salta de 150 a 0.
+  const animar = useRef<boolean | null>(null)
+  const motionValue = useMotionValue(direction === "down" ? startValue : value)
   const springValue = useSpring(motionValue, {
     damping: 60,
     stiffness: 100,
@@ -31,9 +35,27 @@ export function NumberTicker({
   const isInView = useInView(ref, { once: true, margin: "0px" })
 
   useEffect(() => {
+    const el = ref.current
+    if (!el || animar.current !== null) return
+    const r = el.getBoundingClientRect()
+    const visible = r.top < window.innerHeight && r.bottom > 0
+    const reducido = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches
+    animar.current = !visible && !reducido
+    if (animar.current) {
+      motionValue.jump(direction === "down" ? value : startValue)
+      el.textContent = formatear(
+        direction === "down" ? value : startValue,
+        decimalPlaces
+      )
+    }
+  }, [motionValue, direction, value, startValue, decimalPlaces])
+
+  useEffect(() => {
     let timer: ReturnType<typeof setTimeout> | null = null
 
-    if (isInView) {
+    if (isInView && animar.current) {
       timer = setTimeout(() => {
         motionValue.set(direction === "down" ? startValue : value)
       }, delay * 1000)
@@ -50,10 +72,7 @@ export function NumberTicker({
     () =>
       springValue.on("change", (latest) => {
         if (ref.current) {
-          ref.current.textContent = Intl.NumberFormat("en-US", {
-            minimumFractionDigits: decimalPlaces,
-            maximumFractionDigits: decimalPlaces,
-          }).format(Number(latest.toFixed(decimalPlaces)))
+          ref.current.textContent = formatear(latest, decimalPlaces)
         }
       }),
     [springValue, decimalPlaces]
@@ -68,7 +87,14 @@ export function NumberTicker({
       )}
       {...props}
     >
-      {startValue}
+      {formatear(direction === "down" ? startValue : value, decimalPlaces)}
     </span>
   )
+}
+
+function formatear(n: number, decimales: number) {
+  return Intl.NumberFormat("en-US", {
+    minimumFractionDigits: decimales,
+    maximumFractionDigits: decimales,
+  }).format(Number(n.toFixed(decimales)))
 }

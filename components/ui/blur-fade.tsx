@@ -26,6 +26,8 @@ interface BlurFadeProps extends MotionProps {
   inView?: boolean
   inViewMargin?: MarginType
   blur?: string
+  /** Etiqueta del contenedor: "li" para usarlo como ítem de una lista. */
+  as?: "div" | "li"
 }
 
 const getFilter = (v: Variants[string]) =>
@@ -42,6 +44,7 @@ export function BlurFade({
   inView = false,
   inViewMargin = "-50px",
   blur = "6px",
+  as = "div",
   ...props
 }: BlurFadeProps) {
   const ref = useRef(null)
@@ -70,9 +73,11 @@ export function BlurFade({
     visibleFilter != null &&
     hiddenFilter !== visibleFilter
 
+  const Contenedor = as === "li" ? motion.li : motion.div
+
   return (
     <AnimatePresence>
-      <motion.div
+      <Contenedor
         ref={ref}
         initial="hidden"
         animate={isInView ? "visible" : "hidden"}
@@ -88,7 +93,7 @@ export function BlurFade({
         {...props}
       >
         {children}
-      </motion.div>
+      </Contenedor>
     </AnimatePresence>
   )
 }

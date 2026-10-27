@@ -341,7 +341,7 @@ export function AnatomiaWeb({ className }: { className?: string }) {
             <button
               key={c.titulo}
               type="button"
-              aria-label={`${c.titulo}: ${c.texto}`}
+              aria-label={`${String(i + 1).padStart(2, "0")} · ${c.titulo}: ${c.texto}`}
               aria-pressed={activa === i}
               onPointerEnter={(ev) =>
                 ev.pointerType !== "touch" && setActiva(i)

@@ -45,13 +45,14 @@ export function Razones() {
               const Icono = iconos[i % iconos.length]
               return (
                 <BlurFade
+                  as="li"
                   key={r.titulo}
                   inView
                   delay={0.08 + i * 0.1}
                   duration={0.6}
                   offset={16}
                 >
-                  <li className="h-full">
+                  <div className="h-full">
                     <Inclinable className="h-full" grados={8}>
                       <MagicCard
                         className="h-full rounded-3xl border border-[var(--borde)] bg-[var(--nebulosa)]"
@@ -75,7 +76,7 @@ export function Razones() {
                         </div>
                       </MagicCard>
                     </Inclinable>
-                  </li>
+                  </div>
                 </BlurFade>
               )
             })}

@@ -10,7 +10,7 @@ export const perfil = {
   /** URL pública del sitio: se define en config/sitios.ts. */
   url: sitios.portfolio,
   descripcion:
-    "Diseño web en Montevideo y todo Uruguay: páginas web a medida, landing pages y tiendas online. Rápidas, perfectas en el celular y listas para aparecer en Google.",
+    "Diseño web en Montevideo y todo Uruguay: páginas web a medida, landing pages, tiendas online y turnos online. Rápidas, en tu celular y listas para Google.",
   rol: "Desarrollador y diseñador web",
   ciudad: "Montevideo, Uruguay",
   email: "maximilianomichasevich0@gmail.com",
@@ -21,7 +21,7 @@ export const perfil = {
   mensajeWhatsapp:
     "Hola Maxi, vi tu portfolio y quiero una página web para mi negocio.",
   formacion: [
-    "3 años de carrera en Programación",
+    "Curso de Programación de 3 años (ITS Arias Balpardas)",
     "Bachillerato en Diseño Web",
   ],
 }
@@ -158,7 +158,7 @@ export const preguntas: Pregunta[] = [
   {
     pregunta: "¿Trabajás solo en Montevideo?",
     respuesta:
-      "Estoy en Montevideo, pero hago diseño web para negocios de todo Uruguay: Canelones, Maldonado, Punta del Este, Colonia, Salto y el interior. Las reuniones son por videollamada o, si estás en Montevideo, en persona.",
+      "Trabajo desde el Cerro, en Montevideo, pero hago diseño web para negocios de todo Uruguay: Canelones, Maldonado, Punta del Este, Colonia, Salto y el interior. Las reuniones son por videollamada o, si estás en Montevideo, en persona.",
   },
   {
     pregunta: "¿Mi página va a aparecer en Google?",

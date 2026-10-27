@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react"
 import Image from "next/image"
+import Link from "next/link"
 import {
   ArrowLeft,
   ArrowRight,
@@ -13,6 +14,7 @@ import {
 import { AnimatePresence, motion } from "motion/react"
 
 import { Inclinable } from "@/components/inicio/interacciones"
+import { MontarCerca } from "@/components/inicio/montar-cerca"
 import { HyperText } from "@/components/ui/hyper-text"
 import { Iphone } from "@/components/ui/iphone"
 import { Safari } from "@/components/ui/safari"
@@ -210,13 +212,14 @@ export function Ejemplos() {
                     zIndex: { delay: 0.05 },
                   }}
                   style={{ transformStyle: "preserve-3d" }}
-                  aria-hidden={!centro}
                 >
                   <button
                     type="button"
                     tabIndex={centro ? -1 : 0}
                     onClick={() => !centro && setActivo(i)}
-                    aria-label={centro ? undefined : `Ver ${e.nombre}`}
+                    aria-label={
+                      centro ? `Captura de ${e.nombre}` : `Ver ${e.nombre}`
+                    }
                     className={cn(
                       "block w-full text-left",
                       centro
@@ -372,15 +375,23 @@ export function Ejemplos() {
                     {actual.dato.etiqueta}
                   </span>
                 </p>
-                <a
-                  href={actual.ruta}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="boton-orbita inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold whitespace-nowrap"
-                >
-                  Abrir demo
-                  <ArrowUpRight className="size-4" aria-hidden="true" />
-                </a>
+                <div className="flex flex-wrap items-center gap-3 md:flex-col md:items-end">
+                  <a
+                    href={actual.ruta}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="boton-orbita inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold whitespace-nowrap"
+                  >
+                    Abrir demo
+                    <ArrowUpRight className="size-4" aria-hidden="true" />
+                  </a>
+                  <Link
+                    href={`/ejemplos/${actual.slug}`}
+                    className="enlace text-sm whitespace-nowrap"
+                  >
+                    Cómo está hecha {actual.nombre}
+                  </Link>
+                </div>
               </div>
             </motion.div>
           </AnimatePresence>
@@ -400,40 +411,6 @@ export function Ejemplos() {
         </div>
       </div>
     </section>
-  )
-}
-
-/** Renderiza el contenido recién cuando el bloque se acerca a la pantalla. */
-function MontarCerca({
-  children,
-  className,
-}: {
-  children: React.ReactNode
-  className?: string
-}) {
-  const ref = useRef<HTMLDivElement>(null)
-  const [visible, setVisible] = useState(false)
-
-  useEffect(() => {
-    const el = ref.current
-    if (!el) return
-    const io = new IntersectionObserver(
-      ([e]) => {
-        if (e.isIntersecting) {
-          setVisible(true)
-          io.disconnect()
-        }
-      },
-      { rootMargin: "400px 0px" }
-    )
-    io.observe(el)
-    return () => io.disconnect()
-  }, [])
-
-  return (
-    <div ref={ref} className={className} aria-hidden="true">
-      {visible ? children : null}
-    </div>
   )
 }
 

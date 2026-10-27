@@ -121,7 +121,7 @@ export function ComoTrabajo() {
                     "mono relative z-10 flex size-9 shrink-0 items-center justify-center rounded-full border text-xs",
                     i <= activa
                       ? "border-[var(--cian)] bg-[var(--noche)] text-[var(--cian)]"
-                      : "border-[var(--borde)] bg-[var(--noche)] text-[var(--estrella-45)]"
+                      : "border-[var(--borde)] bg-[var(--noche)] text-[var(--estrella-70)]"
                   )}
                 >
                   {String(i + 1).padStart(2, "0")}
@@ -352,7 +352,7 @@ function Diagrama() {
           <span className="display-md text-lg md:text-2xl">
             Tu web<span className="text-[var(--cian)]">.</span>
           </span>
-          <span className="mono text-[10px] text-[var(--estrella-45)]">
+          <span className="mono text-[10px] text-[var(--estrella-70)]">
             online 24/7
           </span>
         </div>

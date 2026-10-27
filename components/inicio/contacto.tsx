@@ -7,6 +7,7 @@ import { enviarMensaje, type EstadoContacto } from "@/app/acciones/contacto"
 
 import { BorderBeam } from "@/components/ui/border-beam"
 import { HyperText } from "@/components/ui/hyper-text"
+import { MontarCerca } from "@/components/inicio/montar-cerca"
 import { Meteors } from "@/components/ui/meteors"
 import { ShimmerButton } from "@/components/ui/shimmer-button"
 import { perfil } from "@/data/perfil"
@@ -142,12 +143,9 @@ export function Contacto() {
             colorTo="#39d5ff"
             borderWidth={1.5}
           />
-          <div
-            className="pointer-events-none absolute inset-0"
-            aria-hidden="true"
-          >
+          <MontarCerca className="pointer-events-none absolute inset-0">
             <Meteors number={14} minDuration={4} maxDuration={9} />
-          </div>
+          </MontarCerca>
           <div
             className="pointer-events-none absolute -top-40 left-1/2 h-80 w-[40rem] -translate-x-1/2 rounded-full bg-[radial-gradient(closest-side,rgba(57,213,255,0.22),transparent)] blur-2xl"
             aria-hidden="true"
@@ -475,11 +473,11 @@ export function Contacto() {
               <div className="hud rounded-2xl p-5">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <p className="etiqueta-hud">Qué pasa después</p>
-                  <span className="mono flex items-center gap-2 text-[11px] text-[#3fd68c]">
-                    <span className="en-vivo" aria-hidden="true" />
-                    <span suppressHydrationWarning>
-                      En línea · {hora} en Montevideo
-                    </span>
+                  <span
+                    className="mono text-[11px] text-[var(--estrella-45)]"
+                    suppressHydrationWarning
+                  >
+                    {hora} en Montevideo
                   </span>
                 </div>
                 <ol className="mt-4 flex flex-col gap-4">
@@ -519,16 +517,6 @@ export function Contacto() {
             </div>
           </div>
         </div>
-
-        <footer className="mt-16 flex flex-wrap items-center justify-between gap-3 text-sm text-[var(--estrella-45)]">
-          <p translate="no" className="notranslate">
-            {perfil.nombre}, {new Date().getFullYear()}
-          </p>
-          <p>
-            {perfil.formacion[0]}. {perfil.formacion[1]}.
-          </p>
-          <p>{perfil.ciudad}</p>
-        </footer>
       </div>
     </section>
   )

@@ -58,6 +58,7 @@ export function Precios() {
         <ul className="mt-14 grid gap-6 lg:grid-cols-3 lg:items-stretch">
           {paquetes.map((p, i) => (
             <BlurFade
+              as="li"
               key={p.id}
               inView
               delay={0.08 + i * 0.12}
@@ -65,11 +66,11 @@ export function Precios() {
               offset={18}
               className={cn("min-w-0", p.destacado && "lg:-translate-y-4")}
             >
-              <li className="h-full">
+              <div className="h-full">
                 <Inclinable className="h-full" grados={6}>
                   <TarjetaPaquete paquete={p} numero={i + 1} />
                 </Inclinable>
-              </li>
+              </div>
             </BlurFade>
           ))}
         </ul>

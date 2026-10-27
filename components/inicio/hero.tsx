@@ -23,15 +23,24 @@ const GloboOrbital = dynamic(
   { ssr: false }
 )
 
-const datos = [
-  { etiqueta: "Diseño a medida", antes: "", valor: 100, despues: "%" },
-  { etiqueta: "Tiempo de carga", antes: "<", valor: 2, despues: "s" },
-  { etiqueta: "Días de soporte", antes: "", valor: 30, despues: "d" },
-  { etiqueta: "Horas para responder", antes: "", valor: 24, despues: "h" },
+/** Datos de la portada: solo cosas que se pueden cumplir y comprobar. */
+const datos: {
+  etiqueta: string
+  antes?: string
+  valor?: number
+  despues?: string
+  texto?: string
+}[] = [
+  { etiqueta: "Diseño a medida", valor: 100, despues: "%" },
+  { etiqueta: "Días de soporte", valor: 30, despues: "d" },
+  { etiqueta: "Precio desde", antes: "US$", valor: 150 },
+  { etiqueta: "Respuesta", texto: "En el día" },
 ]
 
 export function Hero() {
   const reducido = useReducedMotion()
+  // Partículas y globo esperan a que termine la carga: el texto va primero.
+  const listo = useDespuesDeCargar()
 
   return (
     <section
@@ -51,7 +60,7 @@ export function Hero() {
       />
 
       {/* Capa 2: partículas con parallax y haz de luz. */}
-      {!reducido && (
+      {!reducido && listo && (
         <>
           <div className="pointer-events-none absolute inset-0">
             <Particles
@@ -176,12 +185,20 @@ export function Hero() {
                   {d.etiqueta}
                 </dt>
                 <dd className="display-md mt-1 text-2xl">
-                  {d.antes}
-                  <NumberTicker
-                    value={d.valor}
-                    className="text-[var(--estrella)]"
-                  />
-                  <span className="text-[var(--cian)]">{d.despues}</span>
+                  {d.texto ?? (
+                    <>
+                      {d.antes && (
+                        <span className="mr-0.5 text-base text-[var(--cian)]">
+                          {d.antes}
+                        </span>
+                      )}
+                      <NumberTicker
+                        value={d.valor ?? 0}
+                        className="text-[var(--estrella)]"
+                      />
+                      <span className="text-[var(--cian)]">{d.despues}</span>
+                    </>
+                  )}
                 </dd>
               </div>
             ))}
@@ -206,7 +223,7 @@ export function Hero() {
           >
             <span className="en-vivo" aria-hidden="true" /> SEÑAL ESTABLE
           </span>
-          <GloboDiferido />
+          <GloboDiferido listo={listo} />
         </div>
       </div>
     </section>
@@ -214,11 +231,11 @@ export function Hero() {
 }
 
 /**
- * El globo 3D se monta cuando el navegador termina lo esencial (evento
- * "load" + un momento libre), para no competir con la primera carga.
- * Mientras tanto se ve un disco con el mismo aspecto, sin saltos de diseño.
+ * true cuando el navegador terminó lo esencial (evento "load" + un momento
+ * libre). Los adornos pesados esperan a esto para no competir con la
+ * primera carga.
  */
-function GloboDiferido() {
+function useDespuesDeCargar() {
   const [listo, setListo] = useState(false)
 
   useEffect(() => {
@@ -243,6 +260,14 @@ function GloboDiferido() {
     }
   }, [])
 
+  return listo
+}
+
+/**
+ * Globo 3D. Mientras carga se ve un disco con el mismo aspecto, sin saltos
+ * de diseño.
+ */
+function GloboDiferido({ listo }: { listo: boolean }) {
   if (listo) return <GloboOrbital className="absolute inset-0" />
   return (
     <div
