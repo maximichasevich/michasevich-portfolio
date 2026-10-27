@@ -103,19 +103,21 @@ export function Hero() {
               34°54′S 56°10′O
             </span>
           </div>
-          <GradientText
-            colors={["#39d5ff", "#7c5cff", "#f5f7ff", "#39d5ff"]}
-            animationSpeed={6}
-            className="mb-6 inline-block text-sm font-semibold tracking-wide md:text-base"
-          >
-            {perfil.rol} en {perfil.ciudad}
-          </GradientText>
-
-          <h1
-            id="titulo-hero"
-            className="display brillo max-w-[15ch] text-[clamp(2.3rem,4vw,3.6rem)]"
-          >
-            <TituloVivo texto="Tu negocio merece una página que impresione." />
+          {/* El h1 abre con la búsqueda principal ("diseño web en
+              Montevideo") y sigue con el título grande de la portada. */}
+          <h1 id="titulo-hero">
+            <span className="mb-6 block">
+              <GradientText
+                colors={["#39d5ff", "#7c5cff", "#f5f7ff", "#39d5ff"]}
+                animationSpeed={6}
+                className="inline-block text-sm font-semibold tracking-wide md:text-base"
+              >
+                Diseño web en {perfil.ciudad}
+              </GradientText>
+            </span>
+            <span className="display brillo block max-w-[15ch] text-[clamp(2.3rem,4vw,3.6rem)]">
+              <TituloVivo texto="Tu negocio merece una página que impresione." />
+            </span>
           </h1>
 
           <div className="display-md mt-6 flex flex-wrap items-baseline gap-x-2 text-xl text-[var(--estrella-70)] md:text-2xl">
@@ -134,9 +136,9 @@ export function Hero() {
           </div>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--estrella-70)] md:text-lg">
-            Diseño y programo sitios modernos, rápidos y perfectos en el
-            celular, para que quien te busque te encuentre, te entienda en cinco
-            segundos y te escriba.
+            Diseño y programo páginas web a medida, modernas, rápidas y
+            perfectas en el celular, para que quien te busque en Google te
+            encuentre, te entienda en cinco segundos y te escriba.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">

@@ -268,7 +268,7 @@ online desde USD 500), servicios extra y la nota sobre dominio y alojamiento.
 Los textos y precios se editan en `data/precios.ts`. Cada "Pedir
 presupuesto" abre WhatsApp con el paquete elegido ya escrito.
 
-El número de WhatsApp (59892443629) está en `data/perfil.ts` y lo usan todos
+El número de WhatsApp (59896962132) está en `data/perfil.ts` y lo usan todos
 los botones. El botón flotante (`components/whatsapp-flotante.tsx`) se monta
 en `app/layout.tsx`, así aparece en las cuatro páginas; en las demos el
 mensaje dice desde qué demo te escriben.

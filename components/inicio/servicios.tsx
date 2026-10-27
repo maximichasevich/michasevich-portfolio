@@ -41,8 +41,9 @@ export function Servicios() {
               />
             </h2>
             <p className="mt-5 text-base leading-relaxed text-[var(--estrella-70)] md:text-lg">
-              Tres tipos de página, explicados sin palabras raras. En la primera
-              charla te digo cuál te conviene.
+              Diseño web para negocios de Montevideo y todo Uruguay: tres tipos
+              de página, explicados sin palabras raras. En la primera charla te
+              digo cuál te conviene.
             </p>
           </div>
           {/* Modelo 3D: cubo con lo que incluye cada página. */}

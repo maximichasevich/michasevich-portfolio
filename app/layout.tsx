@@ -12,16 +12,24 @@ const geist = Geist({ subsets: ["latin"], variable: "--font-sans" })
 export const metadata: Metadata = {
   metadataBase: new URL(perfil.url),
   title: {
-    default: `${perfil.nombre} · Páginas web a medida en Montevideo`,
+    default: `Diseño web en Montevideo, Uruguay · ${perfil.nombre}`,
     template: `%s · ${perfil.nombre}`,
   },
   description: perfil.descripcion,
   keywords: [
+    "diseño web",
     "diseño web Montevideo",
+    "diseño web Uruguay",
+    "diseño de páginas web",
+    "páginas web Montevideo",
     "páginas web Uruguay",
-    "tienda online Uruguay",
+    "páginas web a medida",
+    "desarrollo web Uruguay",
+    "diseñador web Montevideo",
     "desarrollador web freelance",
-    "landing page",
+    "tienda online Uruguay",
+    "landing page Uruguay",
+    "posicionamiento web SEO",
   ],
   authors: [{ name: perfil.nombre }],
   creator: perfil.nombre,
@@ -30,7 +38,23 @@ export const metadata: Metadata = {
     locale: "es_UY",
     siteName: perfil.nombre,
   },
-  robots: { index: true, follow: true },
+  twitter: { card: "summary_large_image" },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  // Código de verificación de Google Search Console (opcional): se carga en
+  // Netlify como variable GOOGLE_SITE_VERIFICATION.
+  verification: process.env.GOOGLE_SITE_VERIFICATION
+    ? { google: process.env.GOOGLE_SITE_VERIFICATION }
+    : undefined,
 }
 
 export const viewport: Viewport = {
@@ -48,7 +72,11 @@ export default function RootLayout({
     <html
       lang="es"
       suppressHydrationWarning
-      className={cn("dark font-sans antialiased", geist.variable, fuentesInicio)}
+      className={cn(
+        "dark font-sans antialiased",
+        geist.variable,
+        fuentesInicio
+      )}
     >
       <body>
         {children}

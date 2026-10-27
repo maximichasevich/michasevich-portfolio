@@ -42,7 +42,10 @@ export function Faq() {
               <AccordionTrigger className="display-md py-6 text-left text-lg text-[var(--estrella)] hover:no-underline md:text-xl [&_svg]:text-[var(--cian)]">
                 {p.pregunta}
               </AccordionTrigger>
-              <AccordionContent className="pb-6 text-base leading-relaxed text-[var(--estrella-70)]">
+              <AccordionContent
+                forceMount
+                className="pb-6 text-base leading-relaxed text-[var(--estrella-70)]"
+              >
                 {p.respuesta}
               </AccordionContent>
             </AccordionItem>

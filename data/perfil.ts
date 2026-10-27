@@ -10,12 +10,14 @@ export const perfil = {
   /** URL pública del sitio: se define en config/sitios.ts. */
   url: sitios.portfolio,
   descripcion:
-    "Diseño y desarrollo páginas web para negocios, profesionales y tiendas online en Uruguay. Rápidas, perfectas en el celular y pensadas para conseguir clientes.",
+    "Diseño web en Montevideo y todo Uruguay: páginas web a medida, landing pages y tiendas online. Rápidas, perfectas en el celular y listas para aparecer en Google.",
   rol: "Desarrollador y diseñador web",
   ciudad: "Montevideo, Uruguay",
   email: "maximilianomichasevich0@gmail.com",
   /** WhatsApp con código de país y sin espacios ni "+". */
-  whatsapp: "59892443629",
+  whatsapp: "59896962132",
+  /** El mismo número, como se muestra en la página. */
+  telefono: "+598 96 962 132",
   mensajeWhatsapp:
     "Hola Maxi, vi tu portfolio y quiero una página web para mi negocio.",
   formacion: [
@@ -53,13 +55,13 @@ export type Servicio = {
 
 export const servicios: Servicio[] = [
   {
-    titulo: "Sitios para negocios",
+    titulo: "Sitios web para negocios",
     descripcion:
       "La página que aparece cuando alguien busca tu negocio en Google. Muestra qué hacés, dónde estás y cómo contactarte, sin vueltas.",
     incluye: ["Diseño a medida", "Botón de WhatsApp", "Mapa y horarios"],
   },
   {
-    titulo: "Páginas de presentación",
+    titulo: "Landing pages",
     descripcion:
       "Una sola página pensada para convencer: para lanzar un servicio, un evento o mostrarte como profesional con tu propio estilo.",
     incluye: [
@@ -152,6 +154,16 @@ export const preguntas: Pregunta[] = [
     pregunta: "¿Cuánto cuesta una página web?",
     respuesta:
       "Hay tres paquetes: una página de una sección desde 150 dólares, un sitio institucional desde 300 y una tienda online desde 500. En la primera charla te doy un presupuesto cerrado según lo que necesites, sin sorpresas después. Dominio y alojamiento van aparte.",
+  },
+  {
+    pregunta: "¿Trabajás solo en Montevideo?",
+    respuesta:
+      "Estoy en Montevideo, pero hago diseño web para negocios de todo Uruguay: Canelones, Maldonado, Punta del Este, Colonia, Salto y el interior. Las reuniones son por videollamada o, si estás en Montevideo, en persona.",
+  },
+  {
+    pregunta: "¿Mi página va a aparecer en Google?",
+    respuesta:
+      "Sí. Cada página sale con lo necesario para el posicionamiento en buscadores (SEO): títulos y descripciones pensados para lo que busca tu cliente, carga rápida, versión para celular y mapa del sitio para que Google la encuentre.",
   },
   {
     pregunta: "¿Cuánto tarda?",

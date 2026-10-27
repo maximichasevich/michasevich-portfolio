@@ -6,7 +6,7 @@ import { perfil } from "@/data/perfil"
  * Imagen que aparece al compartir el link por WhatsApp, Instagram o LinkedIn.
  * Misma paleta que la portada: noche, violeta y cian, con un globo en órbita.
  */
-export const alt = `${perfil.nombre} · Páginas web que impresionan`
+export const alt = `Diseño web en Montevideo · ${perfil.nombre}`
 export const size = { width: 1200, height: 630 }
 export const contentType = "image/png"
 

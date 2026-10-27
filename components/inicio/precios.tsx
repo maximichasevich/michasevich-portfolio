@@ -44,7 +44,8 @@ export function Precios() {
               id="titulo-servicios"
               className="display text-[clamp(2.4rem,6vw,4.8rem)]"
             >
-              Precios claros, <span className="degradado">sin sorpresas.</span>
+              Precios de páginas web,{" "}
+              <span className="degradado">sin sorpresas.</span>
             </h2>
           </div>
           <p className="text-base leading-relaxed text-[var(--estrella-70)] md:text-lg">

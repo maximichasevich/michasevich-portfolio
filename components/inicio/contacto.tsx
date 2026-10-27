@@ -501,8 +501,20 @@ export function Contacto() {
                 </ol>
               </div>
 
-              <p className="mono text-center text-xs break-all text-[var(--estrella-45)] lg:text-left">
-                {perfil.email}
+              <p className="mono flex flex-wrap justify-center gap-x-3 gap-y-1 text-xs break-all text-[var(--estrella-45)] lg:justify-start">
+                <a
+                  href={`tel:+${perfil.whatsapp}`}
+                  className="whitespace-nowrap hover:text-[var(--cian)] focus-visible:text-[var(--cian)] focus-visible:outline-none"
+                >
+                  {perfil.telefono}
+                </a>
+                <span aria-hidden="true">·</span>
+                <a
+                  href={`mailto:${perfil.email}`}
+                  className="hover:text-[var(--cian)] focus-visible:text-[var(--cian)] focus-visible:outline-none"
+                >
+                  {perfil.email}
+                </a>
               </p>
             </div>
           </div>
