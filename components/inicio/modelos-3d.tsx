@@ -119,7 +119,7 @@ function useGiro3d({
       const dy = ev.clientY - g.uy
       g.ux = ev.clientX
       g.uy = ev.clientY
-      g.vy = dx * 0.45
+      g.vy = -dx * 0.45
       g.y += g.vy
       if (g.tipo !== "touch") {
         g.vx = -dy * 0.45

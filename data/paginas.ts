@@ -264,11 +264,16 @@ export const paginas: Pagina[] = [
         ],
       },
       {
-        titulo: "Ideas parecidas en mis sitios de muestra",
+        titulo: "Probalo en mis sitios de muestra",
         parrafos: [
-          "Ninguna de mis demos es un sistema de turnos completo, pero dos tienen piezas parecidas. En La Espiga, el cliente arma su pedido y elige la hora de retiro. En Estudio Faro, la agenda de reuniones guía al cliente en cinco pasos para pedir una primera reunión; después el estudio coordina el día y la hora.",
+          "La Navaja es una barbería de muestra con un sistema de turnos completo: el cliente elige servicio, barbero, día y hora, ve solo los horarios libres y confirma pagando una seña del 50 % o el total. El pago es simulado, así que podés probarlo de punta a punta.",
+          "Otras dos demos tienen piezas parecidas. En La Espiga, el cliente arma su pedido y elige la hora de retiro. En Estudio Faro, la agenda de reuniones guía al cliente en cinco pasos para pedir una primera reunión.",
         ],
         enlaces: [
+          {
+            texto: "Ver la agenda con seña de La Navaja",
+            href: "/ejemplos/la-navaja",
+          },
           {
             texto: "Ver cómo se elige la hora de retiro en La Espiga",
             href: "/ejemplos/la-espiga",
@@ -313,7 +318,7 @@ export const paginas: Pagina[] = [
           "Sí. Lo armo a medida para cada negocio, así que se adapta a cómo trabajás vos y no al revés.",
       },
     ],
-    relacionados: ["/barberias", "/ejemplos/estudio-faro", "/sitios-web"],
+    relacionados: ["/barberias", "/ejemplos/la-navaja", "/sitios-web"],
     mensaje: "Hola Maxi, quiero un sistema de turnos online para mi negocio.",
   },
 
@@ -341,6 +346,18 @@ export const paginas: Pagina[] = [
         titulo: "Qué conviene según tu barbería",
         parrafos: [
           "Si recién arrancás, una landing page con fotos de tus cortes, precios y WhatsApp es suficiente. Si ya tenés la agenda llena, el sistema de turnos te ahorra horas por semana.",
+        ],
+      },
+      {
+        titulo: "Mirá un ejemplo",
+        parrafos: [
+          "La Navaja es una barbería de muestra que hice para mostrar cómo funciona: carta de servicios con precios, agenda por barbero que solo ofrece horarios libres y seña del 50 % para que nadie deje el sillón vacío.",
+        ],
+        enlaces: [
+          {
+            texto: "Ver La Navaja, barbería de muestra",
+            href: "/ejemplos/la-navaja",
+          },
         ],
       },
     ],
@@ -376,7 +393,7 @@ export const paginas: Pagina[] = [
         respuesta: "Sí, con todo Uruguay. Las reuniones son por videollamada.",
       },
     ],
-    relacionados: ["/turnos-online", "/landing-pages", "/emprendimientos"],
+    relacionados: ["/turnos-online", "/ejemplos/la-navaja", "/landing-pages"],
     mensaje: "Hola Maxi, tengo una barbería y quiero una página web.",
   },
   {

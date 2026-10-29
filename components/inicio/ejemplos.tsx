@@ -117,7 +117,7 @@ export function Ejemplos() {
               id="titulo-trabajos"
               className="display mt-4 text-[clamp(2.4rem,6vw,4.8rem)]"
             >
-              Tres negocios. <span className="degradado">Tres mundos.</span>
+              Cuatro negocios. <span className="degradado">Cuatro mundos.</span>
             </h2>
           </div>
           <p className="max-w-sm text-base leading-relaxed text-[var(--estrella-70)]">
@@ -159,7 +159,10 @@ export function Ejemplos() {
             {ejemplos.map((e, i) => {
               const d = desfase(i, activo, total)
               const centro = d === 0
-              const brilla = i === destacado
+              // Con más de tres demos, la que queda "atrás" espera escondida
+              // detrás de la del centro hasta que le toca entrar por un costado.
+              const lejos = Math.abs(d) > 1
+              const brilla = i === destacado && !lejos
               return (
                 <motion.div
                   key={e.slug}
@@ -168,13 +171,14 @@ export function Ejemplos() {
                   onPointerEnter={(ev) => {
                     if (ev.pointerType === "mouse") setResaltado(i)
                   }}
+                  aria-hidden={lejos || undefined}
                   animate={{
-                    x: `${d * 62}%`,
+                    x: lejos ? "0%" : `${d * 62}%`,
                     // La destacada se endereza y crece, pero no se mueve de su lugar.
                     rotateY: brilla ? d * -10 : d * -38,
                     scale: brilla ? (centro ? 1 : 0.88) : centro ? 0.9 : 0.72,
-                    opacity: brilla ? 1 : centro ? 0.4 : 0.35,
-                    zIndex: brilla ? 3 : centro ? 2 : 1,
+                    opacity: lejos ? 0 : brilla ? 1 : centro ? 0.4 : 0.35,
+                    zIndex: lejos ? 0 : brilla ? 3 : centro ? 2 : 1,
                     filter: brilla ? "saturate(1)" : "saturate(0.6)",
                     // La destacada de un costado sube apenas, como si se acercara.
                     y: brilla && !centro ? "-3%" : "0%",
@@ -211,11 +215,14 @@ export function Ejemplos() {
                     filter: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
                     zIndex: { delay: 0.05 },
                   }}
-                  style={{ transformStyle: "preserve-3d" }}
+                  style={{
+                    transformStyle: "preserve-3d",
+                    pointerEvents: lejos ? "none" : undefined,
+                  }}
                 >
                   <button
                     type="button"
-                    tabIndex={centro ? -1 : 0}
+                    tabIndex={centro || lejos ? -1 : 0}
                     onClick={() => !centro && setActivo(i)}
                     aria-label={
                       centro ? `Captura de ${e.nombre}` : `Ver ${e.nombre}`
@@ -402,7 +409,7 @@ export function Ejemplos() {
           <div className="flex flex-wrap items-end justify-between gap-4">
             <p className="etiqueta-hud">Archivo de pantallas</p>
             <p className="mono text-xs text-[var(--estrella-45)]">
-              {capturas.length} pantallas reales · 3 sitios · 0 plantillas
+              {capturas.length} pantallas reales · {ejemplos.length} sitios · 0 plantillas
             </p>
           </div>
           <MontarCerca className="mt-6 h-[420px] md:h-[560px]">

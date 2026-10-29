@@ -94,6 +94,31 @@ export const paginasDemo: PaginaDemo[] = [
     ],
     relacionados: ["/tiendas-online", "/emprendimientos", "/comercios"],
   },
+  {
+    slug: "la-navaja",
+    titulo: "Ejemplo: página web con turnos online para barbería",
+    descripcion:
+      "Proyecto de muestra de página web para una barbería: carta de servicios con precios, turnos online por barbero y seña o pago total con Mercado Pago.",
+    h1: "La Navaja: ejemplo de página web con turnos online para una barbería",
+    bajada:
+      "Una barbería clásica de Ciudad Vieja que quiere dejar de agendar por WhatsApp y que nadie le deje el sillón vacío.",
+    secciones: [
+      {
+        titulo: "El problema",
+        parrafos: [
+          "En una barbería el teléfono suena mientras estás cortando. Los turnos se arreglan con idas y vueltas por mensaje, se superponen horarios y, cuando alguien no viene, ese tiempo se pierde.",
+        ],
+      },
+      {
+        titulo: "La solución",
+        parrafos: [
+          "La página muestra la carta de servicios con precios y una agenda que solo ofrece horarios donde el servicio entra completo, según el horario del local y los días de cada barbero. El cliente elige servicio, barbero, día y hora en un minuto.",
+          "Para confirmar el turno se paga una seña del 50 % o el total, con tarjeta, Mercado Pago, transferencia o Abitab y RedPagos. Si cancela con 24 horas o más se le devuelve todo; si no viene, la seña queda para el local. En la demo el pago es simulado y no se cobra nada.",
+        ],
+      },
+    ],
+    relacionados: ["/barberias", "/turnos-online", "/sitios-web"],
+  },
 ]
 
 export function buscarDemo(slug: string) {

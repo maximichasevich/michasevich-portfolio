@@ -87,7 +87,7 @@ export default function SobreMi() {
             </p>
             <p className="mt-4 text-base leading-relaxed text-[var(--estrella-70)] md:text-lg">
               En 2026 empecé a ofrecer páginas web a negocios. Para mostrar cómo
-              trabajo hice tres sitios de muestra, cada uno para un rubro
+              trabajo hice cuatro sitios de muestra, cada uno para un rubro
               distinto:{" "}
               <Link href="/ejemplos/la-espiga" className="enlace">
                 La Espiga, una panadería de barrio
@@ -95,10 +95,14 @@ export default function SobreMi() {
               ,{" "}
               <Link href="/ejemplos/estudio-faro" className="enlace">
                 Estudio Faro, un estudio de arquitectura
-              </Link>{" "}
-              y{" "}
+              </Link>
+              ,{" "}
               <Link href="/ejemplos/verde-tienda" className="enlace">
                 Verde Tienda, una tienda online de plantas
+              </Link>{" "}
+              y{" "}
+              <Link href="/ejemplos/la-navaja" className="enlace">
+                La Navaja, una barbería con turnos online
               </Link>
               .
             </p>

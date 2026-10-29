@@ -1,5 +1,5 @@
 /**
- * Direcciones públicas del portfolio y de las tres demos.
+ * Direcciones públicas del portfolio y de las cuatro demos.
  *
  * Cuando tengas las direcciones definitivas (o tu dominio propio), cambialas
  * acá o, mejor, en las variables de entorno del sitio en Netlify
@@ -20,4 +20,7 @@ export const sitios = {
   verdeTienda:
     process.env.NEXT_PUBLIC_DEMO_VERDE_TIENDA_URL ??
     "https://verdetienda.michasevich.com",
+  laNavaja:
+    process.env.NEXT_PUBLIC_DEMO_LA_NAVAJA_URL ??
+    "https://lanavaja.michasevich.com",
 }

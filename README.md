@@ -71,7 +71,7 @@ Environment variables*.
 | `MENSAJES_SAL` | Texto secreto al azar para la huella anónima del límite de envíos |
 | `SUPABASE_DB_PASSWORD` | Solo para la CLI de Supabase en tu computadora |
 | `NEXT_PUBLIC_SITE_URL` | Dirección pública del portfolio (opcional) |
-| `NEXT_PUBLIC_DEMO_*_URL` | Direcciones de las tres demos (opcional) |
+| `NEXT_PUBLIC_DEMO_*_URL` | Direcciones de las cuatro demos (opcional) |
 
 ## Base de datos
 
@@ -119,7 +119,7 @@ docs/           Notas de diseño
 ## English
 
 **Maximiliano Michasevich · Portfolio.** Personal site of a web designer and
-developer based in Montevideo, Uruguay. It presents services, pricing, three
+developer based in Montevideo, Uruguay. It presents services, pricing, four
 live demo projects and a contact form backed by Supabase.
 
 - **Live site:** [michasevich.com](https://michasevich.com)

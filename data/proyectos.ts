@@ -66,4 +66,16 @@ export const proyectos: Proyecto[] = [
     anio: 2026,
     color: "#3FD68C",
   },
+  {
+    slug: "la-navaja",
+    titulo: "La Navaja",
+    descripcion:
+      "Barbería clásica en Ciudad Vieja. Carta de servicios con precios, turnos online por barbero y seña del 50 % o pago total para que nadie deje el sillón vacío.",
+    imagen: "/proyectos/la-navaja-v2.webp",
+    tecnologias: ["Next.js", "Mercado Pago", "CSS 3D"],
+    link: sitios.laNavaja,
+    tipo: "Sitio para negocio",
+    anio: 2026,
+    color: "#c8a05a",
+  },
 ]

@@ -205,9 +205,26 @@ export const ejemplos: Ejemplo[] = [
     ],
     dato: { valor: "4", etiqueta: "pasos para comprar" },
   },
+  {
+    slug: "la-navaja",
+    nombre: "La Navaja",
+    rubro: "Barbería clásica",
+    publico: "Hombres de todas las edades que reservan desde el celular",
+    ruta: sitios.laNavaja,
+    color: "#c8a05a",
+    escritorio: "/portfolio/la-navaja-d0.webp",
+    celular: "/portfolio/la-navaja-m0.webp",
+    funciones: [
+      "Turnos online según barbero y duración",
+      "Seña del 50 % o pago total online",
+      "Carta de servicios con precios",
+      "Poste de barbero y navaja en 3D",
+    ],
+    dato: { valor: "5", etiqueta: "pasos para reservar y pagar" },
+  },
 ]
 
 /** Todas las capturas, para el muro 3D. */
-export const capturas = ["la-espiga", "estudio-faro", "verde-tienda"].flatMap(
+export const capturas = ["la-espiga", "estudio-faro", "verde-tienda", "la-navaja"].flatMap(
   (s) => [0, 1, 2, 3, 4].map((i) => `/portfolio/${s}-d${i}.webp`)
 )

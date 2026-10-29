@@ -12,9 +12,12 @@ import type { NextConfig } from "next"
  * porque las páginas son estáticas y Next.js incluye pequeños scripts en
  * línea; no se carga ningún otro script de terceros.
  */
+// En desarrollo React usa eval() para reconstruir los errores; en producción nunca.
+const evalSoloDesarrollo = process.env.NODE_ENV === "development" ? " 'unsafe-eval'" : ""
+
 const politicaContenido = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline' https://translate.google.com https://translate.googleapis.com https://translate-pa.googleapis.com https://www.gstatic.com",
+  `script-src 'self' 'unsafe-inline'${evalSoloDesarrollo} https://translate.google.com https://translate.googleapis.com https://translate-pa.googleapis.com https://www.gstatic.com`,
   "style-src 'self' 'unsafe-inline' https://translate.googleapis.com https://www.gstatic.com",
   "img-src 'self' data: blob: https://www.gstatic.com https://fonts.gstatic.com https://translate.google.com https://translate.googleapis.com https://www.google.com",
   "font-src 'self' data:",

@@ -43,6 +43,16 @@
   -webkit-backdrop-filter: blur(14px);
 }
 
+/* El menú flota sobre todo el contenido: base casi opaca y más desenfoque
+   para que los textos que pasan por detrás no se lean a través. */
+.inicio .vidrio.vidrio-menu {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0.02)),
+    color-mix(in srgb, var(--noche) 82%, transparent);
+  backdrop-filter: blur(22px) saturate(140%);
+  -webkit-backdrop-filter: blur(22px) saturate(140%);
+}
+
 /* Botón principal: degradado violeta→cian con halo que crece al pasar. */
 .inicio .boton-orbita {
   position: relative;

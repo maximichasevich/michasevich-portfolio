@@ -67,7 +67,7 @@ export function Nav() {
 
   return (
     <header className="fixed inset-x-0 top-4 z-40 flex justify-center px-4">
-      <div className="vidrio flex w-full max-w-4xl items-center justify-between gap-2 rounded-full py-2 pr-2 pl-5">
+      <div className="vidrio vidrio-menu flex w-full max-w-4xl items-center justify-between gap-2 rounded-full py-2 pr-2 pl-5">
         <Link
           href="/"
           translate="no"
