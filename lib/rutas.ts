@@ -1,3 +1,4 @@
+import { rutaAutomatizacion } from "@/data/automatizacion"
 import { paginasDemo } from "@/data/demos"
 import { paginas } from "@/data/paginas"
 import { ejemplos } from "@/data/trabajo"
@@ -8,9 +9,18 @@ import { ejemplos } from "@/data/trabajo"
  */
 export type Ruta = { ruta: string; nombre: string }
 
-export const rutasServicios: Ruta[] = paginas
-  .filter((p) => p.tipo === "servicio")
-  .map((p) => ({ ruta: `/${p.slug}`, nombre: p.nombre }))
+/** Página de la línea de automatización de chats (asistentes de WhatsApp). */
+export const rutaChats: Ruta = {
+  ruta: rutaAutomatizacion,
+  nombre: "Automatización de chats con IA",
+}
+
+export const rutasServicios: Ruta[] = [
+  rutaChats,
+  ...paginas
+    .filter((p) => p.tipo === "servicio")
+    .map((p) => ({ ruta: `/${p.slug}`, nombre: p.nombre })),
+]
 
 export const rutasRubros: Ruta[] = paginas
   .filter((p) => p.tipo === "rubro")

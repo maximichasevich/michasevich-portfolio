@@ -10,7 +10,7 @@ export const perfil = {
   /** URL pública del sitio: se define en config/sitios.ts. */
   url: sitios.portfolio,
   descripcion:
-    "Diseño web en Montevideo y todo Uruguay: páginas web a medida, landing pages, tiendas online y turnos online. Rápidas, en tu celular y listas para Google.",
+    "Diseño web y asistentes de WhatsApp con inteligencia artificial en Montevideo y todo Uruguay: páginas a medida, tiendas online y atención las 24 horas.",
   rol: "Desarrollador y diseñador web",
   ciudad: "Montevideo, Uruguay",
   email: "maximilianomichasevich0@gmail.com",

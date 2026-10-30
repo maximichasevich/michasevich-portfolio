@@ -2,6 +2,8 @@
 
 import { useEffect, useState } from "react"
 import dynamic from "next/dynamic"
+import Link from "next/link"
+import { MessagesSquare } from "lucide-react"
 
 import { Magnetico } from "@/components/inicio/interacciones"
 import { TituloVivo } from "@/components/inicio/titulo-vivo"
@@ -10,6 +12,7 @@ import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern"
 import { NumberTicker } from "@/components/ui/number-ticker"
 import { ShimmerButton } from "@/components/ui/shimmer-button"
 import { WordRotate } from "@/components/ui/word-rotate"
+import { rutaAutomatizacion } from "@/data/automatizacion"
 import { perfil } from "@/data/perfil"
 import { useReducedMotion } from "@/hooks/use-reduced-motion"
 import { cn } from "@/lib/utils"
@@ -121,11 +124,11 @@ export function Hero() {
                 animationSpeed={6}
                 className="inline-block text-sm font-semibold tracking-wide md:text-base"
               >
-                Diseño web en {perfil.ciudad}
+                Diseño web y asistentes de WhatsApp · {perfil.ciudad}
               </GradientText>
             </span>
-            <span className="display brillo block max-w-[15ch] text-[clamp(2.3rem,4vw,3.6rem)]">
-              <TituloVivo texto="Tu negocio merece una página que impresione." />
+            <span className="display brillo block max-w-[17ch] text-[clamp(2.2rem,3.8vw,3.4rem)]">
+              <TituloVivo texto="Páginas web y asistentes de WhatsApp para tu negocio." />
             </span>
           </h1>
 
@@ -145,9 +148,10 @@ export function Hero() {
           </div>
 
           <p className="mt-6 max-w-xl text-base leading-relaxed text-[var(--estrella-70)] md:text-lg">
-            Diseño y programo páginas web a medida, modernas, rápidas y
-            perfectas en el celular, para que quien te busque en Google te
-            encuentre, te entienda en cinco segundos y te escriba.
+            Diseño páginas web a medida, rápidas y perfectas en el celular, para
+            que quien te busque en Google te encuentre. Y armo asistentes de
+            WhatsApp con inteligencia artificial que responden a tus clientes
+            las 24 horas, para que nadie se quede sin respuesta.
           </p>
 
           <div className="mt-10 flex flex-wrap items-center gap-4">
@@ -167,6 +171,18 @@ export function Hero() {
               >
                 Quiero mi página
               </ShimmerButton>
+            </Magnetico>
+            <Magnetico fuerza={0.22}>
+              <Link
+                href={rutaAutomatizacion}
+                className="boton-fantasma inline-flex items-center gap-2 rounded-full px-7 py-4 text-base font-medium"
+              >
+                <MessagesSquare
+                  className="size-5 text-[#25d366]"
+                  aria-hidden="true"
+                />
+                Asistente de WhatsApp
+              </Link>
             </Magnetico>
             <Magnetico fuerza={0.22}>
               <a

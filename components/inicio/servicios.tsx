@@ -30,7 +30,7 @@ export function Servicios() {
       <div className="mx-auto max-w-6xl">
         <div className="grid items-center gap-10 md:grid-cols-[1fr_auto]">
           <div className="max-w-2xl">
-            <p className="etiqueta-hud mb-4">[01] Qué hago</p>
+            <p className="etiqueta-hud mb-4">[01] Diseño web</p>
             <h2
               id="titulo-que-hago"
               className="display text-[clamp(2.4rem,6vw,4.8rem)]"

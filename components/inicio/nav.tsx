@@ -5,20 +5,28 @@ import Link from "next/link"
 
 import { SelectorIdioma } from "@/components/idioma/selector-idioma"
 import { MenuHud, type Seccion } from "@/components/inicio/menu-hud"
+import { rutaAutomatizacion } from "@/data/automatizacion"
 import { perfil } from "@/data/perfil"
 
 const secciones: Seccion[] = [
   { id: "inicio", texto: "Inicio" },
-  { id: "que-hago", texto: "Qué hago" },
+  { id: "lineas", texto: "Servicios" },
+  { id: "que-hago", texto: "Diseño web" },
+  {
+    id: "automatizacion",
+    texto: "Automatización de chats",
+    href: rutaAutomatizacion,
+    corto: "Automatización",
+  },
   { id: "trabajos", texto: "Ejemplos" },
   { id: "proceso", texto: "Cómo trabajo" },
-  { id: "servicios", texto: "Servicios" },
+  { id: "servicios", texto: "Precios web" },
   { id: "preguntas", texto: "Preguntas" },
   { id: "contacto", texto: "Contacto" },
 ]
 
 /** Enlaces visibles en escritorio (el resto está en el menú). */
-const visibles = ["trabajos", "proceso", "servicios"]
+const visibles = ["automatizacion", "trabajos", "servicios"]
 
 export function Nav() {
   const [abierto, setAbierto] = useState(false)
@@ -85,20 +93,20 @@ export function Nav() {
           {secciones
             .filter((s) => visibles.includes(s.id))
             .map((s) => (
-              <a
+              <Link
                 key={s.id}
-                href={`#${s.id}`}
+                href={s.href ?? `#${s.id}`}
                 aria-current={activa === s.id ? "location" : undefined}
                 className="relative hidden rounded-full px-3 py-2 text-sm text-[var(--estrella-70)] transition-colors hover:text-[var(--estrella)] focus-visible:text-[var(--estrella)] focus-visible:outline-none aria-[current=location]:text-[var(--estrella)] md:inline"
               >
-                {s.texto}
+                {s.corto ?? s.texto}
                 {activa === s.id && (
                   <span
                     className="absolute inset-x-3 -bottom-0.5 h-px bg-gradient-to-r from-[var(--cian)] to-[var(--violeta)]"
                     aria-hidden="true"
                   />
                 )}
-              </a>
+              </Link>
             ))}
           <SelectorIdioma variante="barra" />
           <button

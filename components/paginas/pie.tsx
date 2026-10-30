@@ -66,7 +66,10 @@ export function Pie() {
         <p translate="no" className="notranslate">
           {perfil.nombre}, {new Date().getFullYear()}
         </p>
-        <p>Diseño web desde el Cerro, Montevideo, para todo Uruguay.</p>
+        <p>
+          Diseño web y asistentes de WhatsApp desde el Cerro, Montevideo, para
+          todo Uruguay.
+        </p>
       </div>
     </footer>
   )

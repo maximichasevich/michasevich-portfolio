@@ -2,13 +2,21 @@
 
 import { useState } from "react"
 import { ArrowUpRight, Check, Copy, Mail, MessageCircle, X } from "lucide-react"
+import Link from "next/link"
 import { Dialog } from "radix-ui"
 
 import { linkEmail, linkWhatsapp, perfil } from "@/data/perfil"
 import { ejemplos } from "@/data/trabajo"
 import { useHoraMontevideo } from "@/hooks/use-hora-montevideo"
 
-export type Seccion = { id: string; texto: string }
+/** Sección de la portada. Con "href", el enlace lleva a otra página. */
+export type Seccion = {
+  id: string
+  texto: string
+  href?: string
+  /** Texto más corto para la barra de escritorio. */
+  corto?: string
+}
 
 /**
  * Menú de pantalla completa con estética de consola: secciones numeradas,
@@ -84,11 +92,10 @@ export function MenuHud({
                 <ol className="flex flex-col">
                   {secciones.map((s, i) => (
                     <li key={s.id} className="border-b border-[var(--borde)]">
-                      <button
-                        type="button"
-                        onClick={() => ir(s.id)}
-                        aria-current={activa === s.id ? "location" : undefined}
-                        className="group flex w-full items-baseline gap-5 py-4 text-left focus-visible:outline-none md:py-5"
+                      <Opcion
+                        seccion={s}
+                        onIr={() => ir(s.id)}
+                        actual={activa === s.id}
                       >
                         <span className="mono w-8 shrink-0 text-xs text-[var(--estrella-45)] group-hover:text-[var(--cian)] group-focus-visible:text-[var(--cian)]">
                           {String(i + 1).padStart(2, "0")}
@@ -101,7 +108,7 @@ export function MenuHud({
                         >
                           {s.texto}
                         </span>
-                      </button>
+                      </Opcion>
                     </li>
                   ))}
                 </ol>
@@ -203,5 +210,37 @@ export function MenuHud({
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
+  )
+}
+
+/** Opción del menú: botón que baja a la sección, o enlace a otra página. */
+function Opcion({
+  seccion,
+  onIr,
+  actual,
+  children,
+}: {
+  seccion: Seccion
+  onIr: () => void
+  actual: boolean
+  children: React.ReactNode
+}) {
+  const clase =
+    "group flex w-full items-baseline gap-5 py-4 text-left focus-visible:outline-none md:py-5"
+  if (seccion.href)
+    return (
+      <Link href={seccion.href} className={clase}>
+        {children}
+      </Link>
+    )
+  return (
+    <button
+      type="button"
+      onClick={onIr}
+      aria-current={actual ? "location" : undefined}
+      className={clase}
+    >
+      {children}
+    </button>
   )
 }

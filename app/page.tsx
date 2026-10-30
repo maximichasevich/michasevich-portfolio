@@ -6,8 +6,10 @@ import { Contacto } from "@/components/inicio/contacto"
 import { ComoTrabajo } from "@/components/inicio/como-trabajo"
 import { Ejemplos } from "@/components/inicio/ejemplos"
 import { Faq } from "@/components/inicio/faq"
+import { FranjaAutomatizacion } from "@/components/inicio/franja-automatizacion"
 import { Hero } from "@/components/inicio/hero"
 import { CursorLuz } from "@/components/inicio/interacciones"
+import { LineasServicio } from "@/components/inicio/lineas-servicio"
 import { Nav } from "@/components/inicio/nav"
 import { Precios } from "@/components/inicio/precios"
 import { Razones } from "@/components/inicio/razones"
@@ -18,7 +20,8 @@ import { Pie } from "@/components/paginas/pie"
 import { perfil } from "@/data/perfil"
 import { esquemaInicio } from "@/lib/schema"
 
-const titulo = "Diseño web en Montevideo, Uruguay · Maximiliano Michasevich"
+const titulo =
+  "Diseño web y asistentes de WhatsApp en Montevideo · Maximiliano Michasevich"
 
 export const metadata: Metadata = {
   title: { absolute: titulo },
@@ -28,7 +31,7 @@ export const metadata: Metadata = {
     url: "/",
     title: titulo,
     description:
-      "Páginas web a medida, landing pages y tiendas online para negocios de todo Uruguay. Diseño propio, carga rápida y listas para Google.",
+      "Páginas web a medida y asistentes de WhatsApp con inteligencia artificial para negocios de todo Uruguay. Diseño propio, carga rápida y atención las 24 horas.",
   },
 }
 
@@ -43,8 +46,10 @@ export default function Page() {
         <main>
           <Hero />
           <Cinta />
+          <LineasServicio />
           <Servicios />
           <Ejemplos />
+          <FranjaAutomatizacion />
           <ComoTrabajo />
           <Precios />
           <Razones />

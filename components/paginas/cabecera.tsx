@@ -3,7 +3,8 @@ import Link from "next/link"
 import { linkWhatsapp, perfil } from "@/data/perfil"
 
 const enlaces = [
-  { href: "/#que-hago", texto: "Servicios" },
+  { href: "/#lineas", texto: "Servicios" },
+  { href: "/automatizacion-de-chats", texto: "Automatización" },
   { href: "/#trabajos", texto: "Ejemplos" },
   { href: "/#servicios", texto: "Precios" },
   { href: "/sobre-mi", texto: "Sobre mí" },
