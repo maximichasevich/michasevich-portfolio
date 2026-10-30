@@ -20,6 +20,7 @@ const tipos = [
   "Sitio para mi negocio",
   "Página de presentación",
   "Tienda online",
+  "Automatización de chats",
   "Todavía no sé",
 ]
 const objetivos = [
@@ -28,6 +29,7 @@ const objetivos = [
   "Aparecer en Google",
   "Mostrar mis trabajos",
   "Tomar reservas o turnos",
+  "Responder WhatsApp las 24 horas",
 ]
 const plazos = ["Lo antes posible", "En 1 mes", "En 2 o 3 meses", "Sin apuro"]
 
@@ -315,6 +317,9 @@ export function Contacto() {
                             {p.nombre} · desde USD {p.desde}
                           </option>
                         ))}
+                        <option value="Automatización de chats">
+                          Automatización de chats (asistente de WhatsApp)
+                        </option>
                         <option value="Otro">Otro</option>
                         <option value="Todavía no sé">Todavía no sé</option>
                       </select>

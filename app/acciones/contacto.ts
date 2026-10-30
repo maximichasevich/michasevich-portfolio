@@ -17,6 +17,7 @@ export type EstadoContacto = {
 
 const opcionesPaquete = [
   ...paquetes.map((p) => p.nombre),
+  "Automatización de chats",
   "Otro",
   "Todavía no sé",
 ]

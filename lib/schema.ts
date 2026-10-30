@@ -3,6 +3,7 @@ import {
   preguntas as preguntasInicio,
   type Pregunta,
 } from "@/data/perfil"
+import { planes, rutaAutomatizacion } from "@/data/automatizacion"
 import { paquetes } from "@/data/precios"
 import { turnos } from "@/data/paginas"
 import { redesActivas } from "@/data/redes"
@@ -44,6 +45,8 @@ export function esquemaPersona() {
       "Tiendas online",
       "Sistemas de turnos online",
       "SEO",
+      "Asistentes de WhatsApp con inteligencia artificial",
+      "Automatización de chats",
     ],
     address: montevideo,
   }
@@ -71,7 +74,7 @@ export function esquemaNegocio() {
   return {
     "@type": "ProfessionalService",
     "@id": idNegocio,
-    name: `${perfil.nombre} · Diseño web`,
+    name: `${perfil.nombre} · Diseño web y automatización de chats`,
     description: perfil.descripcion,
     url,
     image: `${url}/opengraph-image`,
@@ -88,7 +91,7 @@ export function esquemaNegocio() {
     knowsLanguage: "es",
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Diseño y desarrollo de páginas web",
+      name: "Diseño web y asistentes de WhatsApp",
       itemListElement: [
         ...paquetes.map((p) =>
           servicio(
@@ -100,8 +103,26 @@ export function esquemaNegocio() {
         servicio(
           "Sistema de turnos online",
           turnos.desde,
-          `Reserva de turnos desde el celular. Más US$${turnos.mensual} por mes de mantenimiento.`
+          `Reserva de turnos desde el celular. Más US${turnos.mensual} por mes de mantenimiento.`
         ),
+        {
+          "@type": "Offer",
+          url: `${url}${rutaAutomatizacion}`,
+          itemOffered: {
+            "@type": "Service",
+            "@id": `${url}${rutaAutomatizacion}/#servicio`,
+            name: "Asistente de WhatsApp con inteligencia artificial",
+            description:
+              "Atiende el WhatsApp del negocio las 24 horas: responde consultas, junta contactos interesados y toma turnos o pedidos.",
+            serviceType: "Automatización de chats con inteligencia artificial",
+          },
+          priceSpecification: {
+            "@type": "UnitPriceSpecification",
+            minPrice: Math.min(...planes.map((p) => p.mensual)),
+            priceCurrency: "USD",
+            unitText: "mes",
+          },
+        },
       ],
     },
   }
