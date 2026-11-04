@@ -12,8 +12,7 @@ import { cn } from "@/lib/utils"
  * se ve "escribiendo…". Las animaciones están en app/inicio.css (.chat-*);
  * con "reducir movimiento" activado se muestra la charla completa.
  *
- * "animado={false}" muestra solo los primeros mensajes, quietos (para la
- * franja de la portada).
+ * "animado={false}" muestra solo los primeros mensajes, quietos.
  */
 export function ChatDemo({
   animado = true,

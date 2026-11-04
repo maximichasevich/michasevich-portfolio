@@ -55,7 +55,7 @@ export function Precios() {
         </div>
 
         {/* Paquetes: uno debajo del otro en celular, en fila desde 1024 px. */}
-        <ul className="mt-14 grid gap-6 lg:grid-cols-3 lg:items-stretch">
+        <ul className="paquetes mt-14 grid gap-6 lg:grid-cols-3 lg:items-stretch">
           {paquetes.map((p, i) => (
             <BlurFade
               as="li"
@@ -163,8 +163,8 @@ function TarjetaPaquete({
   return (
     <article
       className={cn(
-        "hud relative flex h-full flex-col overflow-hidden rounded-3xl p-7 md:p-8",
-        p.destacado && "shadow-[0_30px_90px_-30px_rgba(57,213,255,0.55)]"
+        "hud paquete relative flex h-full flex-col overflow-hidden rounded-3xl p-7 md:p-8",
+        p.destacado && "paquete-destacado"
       )}
       // Fondo más luminoso para el destacado (en línea porque .hud define
       // su fondo fuera de las capas de Tailwind y le ganaría a una clase).
@@ -183,7 +183,7 @@ function TarjetaPaquete({
           borderWidth={1.5}
           duration={10}
           shineColor={["#39d5ff", "#7c5cff", "#f5f7ff"]}
-          className="rounded-3xl"
+          className="paquete-brillo rounded-3xl transition-opacity duration-300"
         />
       )}
 

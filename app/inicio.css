@@ -762,22 +762,71 @@
   }
 }
 
-/* Franja de la portada dedicada a la automatización de chats: fondo propio
-   (verde WhatsApp que se funde en el violeta de la marca) y bordes en
-   diagonal para que se lea como un segmento aparte. */
-.inicio .franja-chats {
-  background:
-    radial-gradient(60% 80% at 15% 20%, rgba(37, 211, 102, 0.22), transparent 70%),
-    radial-gradient(50% 70% at 90% 90%, rgba(124, 92, 255, 0.35), transparent 70%),
-    linear-gradient(125deg, #062420 0%, #0a1b2e 50%, #170f3d 100%);
-  clip-path: polygon(0 3rem, 100% 0, 100% calc(100% - 3rem), 0 100%);
+/* Sección de la portada dedicada a la automatización de chats: imagen de
+   fondo propia, velo verde WhatsApp → violeta y bordes en diagonal para que
+   se lea como un segmento aparte del diseño web. */
+.inicio .seccion-bots {
+  background: #041a17;
+  clip-path: polygon(0 4rem, 100% 0, 100% calc(100% - 4rem), 0 100%);
 }
-.inicio .franja-chats-rejilla {
-  background-image:
-    linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(70% 60% at 30% 40%, black, transparent);
+.inicio .seccion-bots-velo {
+  background:
+    linear-gradient(90deg, rgba(3, 20, 18, 0.88) 0%, rgba(5, 12, 28, 0.55) 55%, rgba(14, 8, 40, 0.35) 100%),
+    linear-gradient(180deg, rgba(5, 6, 15, 0.5), transparent 25%, transparent 75%, rgba(5, 6, 15, 0.6)),
+    linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px) 0 0 / 56px 56px,
+    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px) 0 0 / 56px 56px;
+}
+.inicio .seccion-bots-degradado {
+  background: linear-gradient(100deg, #25d366, #39d5ff 55%, #7c5cff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+/* Los carruseles se desvanecen en los bordes. */
+.inicio .seccion-bots-columnas {
+  mask-image: linear-gradient(to bottom, transparent, black 12%, black 88%, transparent);
+}
+.inicio .seccion-bots-cinta {
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+/* Los carruseles se mueven siempre, aunque el sistema pida reducir el
+   movimiento (la regla global de globals.css los frenaría): en ese caso van
+   más lentos. */
+@media (prefers-reduced-motion: reduce) {
+  .inicio .seccion-bots .animate-marquee,
+  .inicio .seccion-bots .animate-marquee-vertical {
+    animation-duration: calc(var(--duration) * 1.6) !important;
+    animation-iteration-count: infinite !important;
+  }
+}
+
+/* Tarjetas de precios (portada y planes de /automatizacion-de-chats): se
+   marca el borde de la que tiene el mouse (o el foco del teclado) arriba.
+   Mientras tanto, el destacado deja de resaltar para que no parezcan
+   seleccionadas dos a la vez. */
+.inicio .paquete {
+  transition:
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+.inicio .paquete-destacado {
+  box-shadow: 0 30px 90px -30px rgba(57, 213, 255, 0.55);
+}
+.inicio .paquete:hover,
+.inicio .paquete:focus-within {
+  border-color: rgba(57, 213, 255, 0.75);
+  box-shadow:
+    0 0 0 1px rgba(57, 213, 255, 0.75),
+    0 30px 90px -30px rgba(57, 213, 255, 0.55);
+}
+.inicio .paquetes:has(.paquete:hover, .paquete:focus-within)
+  .paquete-destacado:not(:hover, :focus-within) {
+  box-shadow: none;
+}
+.inicio .paquetes:has(.paquete:hover, .paquete:focus-within)
+  .paquete:not(:hover, :focus-within)
+  .paquete-brillo {
+  opacity: 0;
 }
 /* Logo <M/> con degradé de azul a violeta. */
 .inicio .logo-m {

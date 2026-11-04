@@ -6,10 +6,9 @@ import { Contacto } from "@/components/inicio/contacto"
 import { ComoTrabajo } from "@/components/inicio/como-trabajo"
 import { Ejemplos } from "@/components/inicio/ejemplos"
 import { Faq } from "@/components/inicio/faq"
-import { FranjaAutomatizacion } from "@/components/inicio/franja-automatizacion"
 import { Hero } from "@/components/inicio/hero"
 import { CursorLuz } from "@/components/inicio/interacciones"
-import { LineasServicio } from "@/components/inicio/lineas-servicio"
+import { SeccionBots } from "@/components/inicio/seccion-bots"
 import { Nav } from "@/components/inicio/nav"
 import { Precios } from "@/components/inicio/precios"
 import { Razones } from "@/components/inicio/razones"
@@ -46,10 +45,9 @@ export default function Page() {
         <main>
           <Hero />
           <Cinta />
-          <LineasServicio />
           <Servicios />
           <Ejemplos />
-          <FranjaAutomatizacion />
+          <SeccionBots />
           <ComoTrabajo />
           <Precios />
           <Razones />

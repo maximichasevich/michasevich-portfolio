@@ -24,9 +24,11 @@ import {
 } from "lucide-react"
 
 import { ChatDemo } from "@/components/automatizacion/chat-demo"
+import { Inclinable } from "@/components/inicio/interacciones"
 import { Migas, Preguntas, Relacionados } from "@/components/paginas/bloques"
 import { DatosEstructurados } from "@/components/paginas/datos-estructurados"
 import { Marco } from "@/components/paginas/marco"
+import { BlurFade } from "@/components/ui/blur-fade"
 import { BorderBeam } from "@/components/ui/border-beam"
 import { ShineBorder } from "@/components/ui/shine-border"
 import {
@@ -147,7 +149,7 @@ export default function AutomatizacionDeChats() {
       <DatosEstructurados grafo={grafo} />
       <Migas
         items={[
-          { nombre: "Servicios", ruta: "/#lineas" },
+          { nombre: "Servicios", ruta: "/#automatizacion" },
           { nombre, ruta },
         ]}
       />
@@ -292,14 +294,23 @@ export default function AutomatizacionDeChats() {
         etiqueta="Planes y precios"
         titulo="Elegí el plan según cuántas consultas recibís"
       >
-        <ul className="mt-12 grid gap-6 lg:grid-cols-3 lg:items-stretch">
+        <ul className="paquetes mt-12 grid gap-6 lg:grid-cols-3 lg:items-stretch">
           {planes.map((p, i) => (
-            <li
+            <BlurFade
+              as="li"
               key={p.id}
+              inView
+              delay={0.08 + i * 0.12}
+              duration={0.6}
+              offset={18}
               className={cn("min-w-0", p.destacado && "lg:-translate-y-4")}
             >
-              <TarjetaPlan plan={p} numero={i + 1} />
-            </li>
+              <div className="h-full">
+                <Inclinable className="h-full" grados={6}>
+                  <TarjetaPlan plan={p} numero={i + 1} />
+                </Inclinable>
+              </div>
+            </BlurFade>
           ))}
         </ul>
         <p className="mt-8 flex gap-3 text-sm leading-relaxed text-[var(--estrella)]">
@@ -439,8 +450,8 @@ function TarjetaPlan({ plan: p, numero }: { plan: Plan; numero: number }) {
     <article
       aria-labelledby={`plan-${p.id}`}
       className={cn(
-        "hud relative flex h-full flex-col overflow-hidden rounded-3xl p-7 md:p-8",
-        p.destacado && "shadow-[0_30px_90px_-30px_rgba(57,213,255,0.55)]"
+        "hud paquete relative flex h-full flex-col overflow-hidden rounded-3xl p-7 md:p-8",
+        p.destacado && "paquete-destacado"
       )}
       // Mismo truco que las tarjetas de precios de la portada: .hud define su
       // fondo fuera de las capas de Tailwind.
@@ -458,7 +469,7 @@ function TarjetaPlan({ plan: p, numero }: { plan: Plan; numero: number }) {
           borderWidth={1.5}
           duration={10}
           shineColor={["#39d5ff", "#7c5cff", "#f5f7ff"]}
-          className="rounded-3xl"
+          className="paquete-brillo rounded-3xl transition-opacity duration-300"
         />
       )}
       <div className="flex items-center justify-between gap-3">

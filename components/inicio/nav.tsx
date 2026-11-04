@@ -10,7 +10,6 @@ import { perfil } from "@/data/perfil"
 
 const secciones: Seccion[] = [
   { id: "inicio", texto: "Inicio" },
-  { id: "lineas", texto: "Servicios" },
   { id: "que-hago", texto: "Diseño web" },
   {
     id: "automatizacion",

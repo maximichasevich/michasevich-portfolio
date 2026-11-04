@@ -3,8 +3,7 @@ import type { Pregunta } from "@/data/perfil"
 /**
  * Textos y precios de la línea "Automatización de chats con inteligencia
  * artificial" (asistentes de WhatsApp). Los usan la página
- * /automatizacion-de-chats, la franja de la portada y las tarjetas de
- * servicios.
+ * /automatizacion-de-chats y la sección de la portada (seccion-bots.tsx).
  *
  * Los planes salen de PLANES-Y-PRECIOS.md (versión octubre 2026). Si cambiás
  * un precio allá, cambialo también acá: el diseño se actualiza solo.
@@ -311,5 +310,49 @@ export const preguntasAutomatizacion: Pregunta[] = [
     pregunta: "¿Puedo cancelar cuando quiera?",
     respuesta:
       "Sí. No hay permanencia mínima: avisás con 30 días de anticipación y listo. Lo único que no se devuelve es la instalación. Tus datos son tuyos.",
+  },
+]
+
+/** Charlas cortas (negocios ficticios) del carrusel de la portada. */
+export const charlasPortada = [
+  {
+    negocio: "Hamburguesería",
+    hora: "23:12",
+    cliente: "hacen envíos a Pocitos?",
+    asistente:
+      "¡Sí! Llegamos a Pocitos en 35 a 45 minutos y el envío sale $90. ¿Te paso el menú?",
+  },
+  {
+    negocio: "Tienda de ropa",
+    hora: "08:05",
+    cliente: "tenés el buzo negro en M?",
+    asistente: "Sí, nos queda en M y en L, a $1.890. ¿Querés que te lo reserve?",
+  },
+  {
+    negocio: "Veterinaria",
+    hora: "21:40",
+    cliente: "atienden el sábado?",
+    asistente:
+      "Los sábados atendemos de 9 a 13. ¿Te agendo un turno para tu mascota?",
+  },
+  {
+    negocio: "Gimnasio",
+    hora: "06:18",
+    cliente: "a qué hora es funcional?",
+    asistente:
+      "Funcional es lunes, miércoles y viernes a las 19:00. La cuota sale $1.400 por mes.",
+  },
+  {
+    negocio: "Inmobiliaria",
+    hora: "22:57",
+    cliente: "sigue disponible el apto de 2 dormitorios?",
+    asistente:
+      "Sí, sigue disponible. ¿Te queda bien visitarlo el jueves a las 17:00?",
+  },
+  {
+    negocio: "Barbería",
+    hora: "13:31",
+    cliente: "tenés turno hoy?",
+    asistente: "Hoy me queda libre a las 19:30. Pasame tu nombre y te lo anoto.",
   },
 ]
