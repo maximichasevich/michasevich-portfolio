@@ -63,8 +63,14 @@ export function Pie() {
         </div>
       </div>
       <div className="mx-auto mt-14 flex max-w-6xl flex-wrap items-center justify-between gap-3 text-sm text-[var(--estrella-70)]">
-        <p translate="no" className="notranslate">
-          {perfil.nombre}, {new Date().getFullYear()}
+        <p>
+          <span translate="no" className="notranslate">
+            {perfil.nombre}, {new Date().getFullYear()}
+          </span>
+          <span aria-hidden="true"> · </span>
+          <Link href="/privacidad" className="enlace">
+            Privacidad
+          </Link>
         </p>
         <p>
           Diseño web y asistentes de WhatsApp desde el Cerro, Montevideo, para

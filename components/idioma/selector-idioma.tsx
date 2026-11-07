@@ -13,7 +13,8 @@ import { cn } from "@/lib/utils"
  * cookie `googtrans` (la que lee Google) y se recarga la página; el script de
  * traducción solo se descarga cuando hay un idioma distinto del español, así
  * que quien lee en español no carga nada extra. La cookie vale para todo el
- * sitio, así que el idioma elegido se mantiene en el portfolio y en las demos.
+ * portfolio (cada demo, en su subdominio, guarda la suya). Solo guarda el
+ * código del idioma, nada personal.
  */
 
 export const idiomas = [
@@ -60,7 +61,9 @@ function elegir(codigo: string) {
   try {
     borrarCookie()
     if (codigo !== "es") {
-      document.cookie = `googtrans=/es/${codigo}; path=/; max-age=31536000`
+      // Secure: solo viaja por HTTPS (en localhost se omite para poder probar).
+      const segura = window.location.protocol === "https:" ? "; Secure" : ""
+      document.cookie = `googtrans=/es/${codigo}; path=/; max-age=31536000; SameSite=Lax${segura}`
     }
   } catch {
     // Sin cookies no hay traducción automática; la página sigue en español.

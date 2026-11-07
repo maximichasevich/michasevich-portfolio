@@ -324,7 +324,8 @@ export function GloboOrbital({ className }: { className?: string }) {
     const dy = ev.clientY - e.ultY
     e.ultX = ev.clientX
     e.ultY = ev.clientY
-    e.velGiro = -dx * 0.006
+    // Positivo = el frente del globo va hacia donde va el puntero.
+    e.velGiro = dx * 0.006
     e.giro += e.velGiro
     // Con el dedo solo se gira en horizontal, para no trabar el scroll.
     if (e.tipo === "mouse" || e.tipo === "pen") {
@@ -337,8 +338,8 @@ export function GloboOrbital({ className }: { className?: string }) {
   }
   function alTeclear(ev: React.KeyboardEvent) {
     const e = estado.current
-    if (ev.key === "ArrowLeft") e.velGiro = 0.06
-    else if (ev.key === "ArrowRight") e.velGiro = -0.06
+    if (ev.key === "ArrowLeft") e.velGiro = -0.06
+    else if (ev.key === "ArrowRight") e.velGiro = 0.06
     else if (ev.key === "ArrowUp") e.velInclinacion = -0.03
     else if (ev.key === "ArrowDown") e.velInclinacion = 0.03
     else return

@@ -1,9 +1,21 @@
 "use client"
 
-import { useActionState, useId, useState } from "react"
+import {
+  startTransition,
+  useActionState,
+  useEffect,
+  useId,
+  useRef,
+  useState,
+} from "react"
+import Link from "next/link"
 import { Check, CheckCircle2, Mail, RotateCcw, Send } from "lucide-react"
 
-import { enviarMensaje, type EstadoContacto } from "@/app/acciones/contacto"
+import {
+  enviarMensaje,
+  pedirDesafio,
+  type EstadoContacto,
+} from "@/app/acciones/contacto"
 
 import { BorderBeam } from "@/components/ui/border-beam"
 import { HyperText } from "@/components/ui/hyper-text"
@@ -13,6 +25,7 @@ import { ShimmerButton } from "@/components/ui/shimmer-button"
 import { perfil } from "@/data/perfil"
 import { paquetes } from "@/data/precios"
 import { LIMITES } from "@/lib/limites-contacto"
+import { resolverDesafio } from "@/lib/prueba-trabajo"
 import { useHoraMontevideo } from "@/hooks/use-hora-montevideo"
 import { cn } from "@/lib/utils"
 
@@ -85,6 +98,54 @@ export function Contacto() {
     FormData
   >(enviarMensaje, { estado: "inicial" })
   const err = resultado.errores ?? {}
+
+  /**
+   * Prueba de trabajo anti-robots (ver lib/prueba-trabajo.ts). Se pide y se
+   * resuelve en segundo plano cuando la persona empieza a completar el
+   * formulario, así al tocar Enviar ya suele estar lista.
+   */
+  const pruebaRef = useRef<Promise<{ desafio: string; solucion: number }> | null>(
+    null
+  )
+  const [verificando, setVerificando] = useState(false)
+
+  function prepararPrueba() {
+    if (pruebaRef.current) return pruebaRef.current
+    const p = pedirDesafio().then(async (desafio) => {
+      if (!desafio) throw new Error("Sin desafío")
+      return { desafio, solucion: await resolverDesafio(desafio) }
+    })
+    // Si falla (sin conexión, por ejemplo), se vuelve a pedir al enviar.
+    p.catch(() => {
+      if (pruebaRef.current === p) pruebaRef.current = null
+    })
+    pruebaRef.current = p
+    return p
+  }
+
+  // Después de enviar bien (o si el servidor lo pide) se prepara una nueva.
+  useEffect(() => {
+    if (resultado.estado === "ok" || resultado.nuevoDesafio) {
+      pruebaRef.current = null
+      prepararPrueba()
+    }
+  }, [resultado])
+
+  async function alEnviar(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const datos = new FormData(e.currentTarget)
+    setVerificando(true)
+    try {
+      const { desafio, solucion } = await prepararPrueba()
+      datos.set("desafio", desafio)
+      datos.set("solucion", String(solucion))
+    } catch {
+      // Sin prueba el servidor responde con un aviso para reintentar.
+    } finally {
+      setVerificando(false)
+    }
+    startTransition(() => accion(datos))
+  }
 
   const mensaje = armarMensaje({ nombre, negocio, tipo, metas, plazo })
   const completo = [tipo, metas.length > 0, plazo, nombre.trim()].filter(
@@ -176,32 +237,12 @@ export function Contacto() {
               </p>
 
               <form
-                action={accion}
-                onSubmit={(e) => {
-                  const campo = e.currentTarget.elements.namedItem(
-                    "demora"
-                  ) as HTMLInputElement | null
-                  if (campo?.dataset.inicio)
-                    campo.value = String(
-                      Math.round(
-                        performance.now() - Number(campo.dataset.inicio)
-                      )
-                    )
-                }}
+                onSubmit={alEnviar}
+                onFocusCapture={prepararPrueba}
+                onPointerDownCapture={prepararPrueba}
                 className="relative mt-8 flex flex-col gap-7"
                 noValidate
               >
-                {/* Cuánto tardó en completarse (tiempo mínimo anti-robots). Se mide
-                    en el navegador para no depender de la hora de cada reloj. */}
-                <input
-                  ref={(el) => {
-                    if (el && !el.dataset.inicio)
-                      el.dataset.inicio = String(performance.now())
-                  }}
-                  type="hidden"
-                  name="demora"
-                  defaultValue=""
-                />
                 <input type="hidden" name="resumen" value={resumen} />
                 {/* Campo trampa contra robots: invisible para las personas. */}
                 <div className="absolute -left-[9999px]" aria-hidden="true">
@@ -383,7 +424,7 @@ export function Contacto() {
                 <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                   <ShimmerButton
                     type="submit"
-                    disabled={enviando}
+                    disabled={enviando || verificando}
                     shimmerColor="#39d5ff"
                     shimmerSize="0.08em"
                     shimmerDuration="2.6s"
@@ -391,7 +432,11 @@ export function Contacto() {
                     className="w-full gap-3 px-7 py-4 text-base font-semibold text-[var(--noche)] shadow-[0_18px_50px_-12px_rgba(57,213,255,0.6)] focus-visible:ring-2 focus-visible:ring-[var(--cian)] focus-visible:outline-none sm:w-auto"
                   >
                     <Send className="size-4" aria-hidden="true" />
-                    {enviando ? "Enviando…" : "Enviar mensaje"}
+                    {verificando
+                      ? "Verificando…"
+                      : enviando
+                        ? "Enviando…"
+                        : "Enviar mensaje"}
                   </ShimmerButton>
                   <a
                     href={urlWhatsapp}
@@ -410,6 +455,13 @@ export function Contacto() {
                     Por correo
                   </a>
                 </div>
+                <p className="-mt-3 text-xs leading-relaxed text-[var(--estrella-45)]">
+                  Uso tus datos solo para responderte.{" "}
+                  <Link href="/privacidad" className="enlace">
+                    Política de privacidad
+                  </Link>
+                  .
+                </p>
               </form>
             </div>
 

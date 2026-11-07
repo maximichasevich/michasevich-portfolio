@@ -586,7 +586,7 @@
   height: 340px;
   perspective: 1400px;
   --rx: 58deg;
-  --ry: -38deg;
+  --ry: 38deg;
 }
 .inicio .anatomia {
   position: absolute;
@@ -596,7 +596,9 @@
   height: 150px;
   margin: -75px 0 0 -115px;
   transform-style: preserve-3d;
-  transform: rotateX(var(--rx)) rotateZ(var(--ry));
+  /* Signo invertido: con el modelo acostado, el giro en Z se ve al revés
+     que en Y. Así el arrastre sigue al puntero igual que en el cubo. */
+  transform: rotateX(var(--rx)) rotateZ(calc(var(--ry) * -1));
 }
 .inicio .anatomia-capa {
   --separacion: 10px;

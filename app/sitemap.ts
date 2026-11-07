@@ -23,5 +23,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: r.ruta.startsWith("/ejemplos") ? 0.6 : 0.8,
     })),
+    {
+      url: `${perfil.url}/privacidad`,
+      lastModified: hoy,
+      changeFrequency: "yearly",
+      priority: 0.2,
+    },
   ]
 }

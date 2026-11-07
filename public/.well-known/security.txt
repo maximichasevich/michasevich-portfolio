@@ -1,0 +1,6 @@
+# Si encontrás un problema de seguridad en este sitio, avisame por correo.
+# If you find a security issue on this site, please email me.
+Contact: mailto:maximilianomichasevich0@gmail.com
+Expires: 2027-11-07T00:00:00.000Z
+Preferred-Languages: es, en
+Canonical: https://michasevich.com/.well-known/security.txt

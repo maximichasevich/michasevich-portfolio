@@ -49,6 +49,9 @@ const encabezados = [
       "camera=(), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()",
   },
   { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+  // Otros sitios no pueden incrustar los archivos de este (imágenes, scripts).
+  // "same-site" deja que las demos en subdominios sí puedan.
+  { key: "Cross-Origin-Resource-Policy", value: "same-site" },
 ]
 
 const nextConfig: NextConfig = {

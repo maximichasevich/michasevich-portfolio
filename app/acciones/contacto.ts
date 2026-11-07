@@ -1,9 +1,9 @@
 "use server"
 
 import { createHash } from "node:crypto"
-import { headers } from "next/headers"
 
 import { paquetes } from "@/data/precios"
+import { crearDesafio, ipVisitante, verificarDesafio } from "@/lib/desafio"
 import { LIMITES } from "@/lib/limites-contacto"
 import { clienteSupabase } from "@/lib/supabase"
 
@@ -13,6 +13,8 @@ export type EstadoContacto = {
   mensaje?: string
   /** Errores por campo, para marcarlos en el formulario. */
   errores?: Partial<Record<"nombre" | "email" | "telefono" | "mensaje", string>>
+  /** El formulario tiene que pedir un desafío nuevo antes de reintentar. */
+  nuevoDesafio?: boolean
 }
 
 const opcionesPaquete = [
@@ -24,9 +26,6 @@ const opcionesPaquete = [
 
 const texto = (v: FormDataEntryValue | null) =>
   typeof v === "string" ? v.trim() : ""
-
-/** Tiempo mínimo para completar el formulario: menos que esto es un robot. */
-const MINIMO_MS = 3000
 
 const respuestaOk = {
   estado: "ok",
@@ -40,13 +39,17 @@ const respuestaOk = {
 async function huellaVisitante() {
   const sal = process.env.MENSAJES_SAL
   if (!sal) return null
-  const h = await headers()
-  const ip =
-    h.get("x-nf-client-connection-ip") ??
-    h.get("x-forwarded-for")?.split(",")[0]?.trim() ??
-    h.get("x-real-ip")
+  const ip = await ipVisitante()
   if (!ip) return null
   return createHash("sha256").update(`${sal}:${ip}`).digest("hex")
+}
+
+/**
+ * Entrega un desafío de la prueba de trabajo (ver lib/desafio.ts). El
+ * formulario lo pide cuando la persona empieza a completarlo.
+ */
+export async function pedirDesafio(): Promise<string | null> {
+  return crearDesafio()
 }
 
 /**
@@ -60,10 +63,6 @@ export async function enviarMensaje(
 ): Promise<EstadoContacto> {
   // Campo trampa: las personas no lo ven; los robots lo completan.
   if (texto(datos.get("sitio_web"))) return respuestaOk
-
-  // Tiempo mínimo: el navegador mide cuánto tardó en completarse.
-  const demora = Number(texto(datos.get("demora")))
-  if (demora > 0 && demora < MINIMO_MS) return respuestaOk
 
   const nombre = texto(datos.get("nombre"))
   const email = texto(datos.get("email"))
@@ -87,6 +86,30 @@ export async function enviarMensaje(
     errores.mensaje = "Contame un poco más (al menos 10 caracteres)."
   if (Object.keys(errores).length > 0) {
     return { estado: "error", mensaje: "Revisá los campos marcados.", errores }
+  }
+
+  // Prueba de trabajo: frena los envíos automáticos en cantidad. Incluye el
+  // tiempo mínimo (3 s desde que se empezó a completar), medido en el
+  // servidor, así que no se puede saltear.
+  const prueba = await verificarDesafio(
+    texto(datos.get("desafio")),
+    texto(datos.get("solucion"))
+  )
+  if (prueba === "rapido") {
+    return {
+      estado: "error",
+      mensaje: "Esperá unos segundos y volvé a tocar Enviar.",
+    }
+  }
+  if (prueba !== "ok") {
+    return {
+      estado: "error",
+      mensaje:
+        prueba === "vencido"
+          ? "La página estuvo abierta mucho tiempo. Tocá Enviar de nuevo."
+          : "No pude verificar el envío. Tocá Enviar de nuevo o escribime por WhatsApp.",
+      nuevoDesafio: true,
+    }
   }
 
   const supabase = clienteSupabase()

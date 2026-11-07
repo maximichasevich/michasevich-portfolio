@@ -19,7 +19,8 @@ import { cn } from "@/lib/utils"
  * placa de video, no descargan ninguna librería). Comparten el mismo manejo:
  * se arrastran para girarlos (mouse en los dos ejes; dedo solo en horizontal
  * para no trabar el scroll), tienen inercia y su bucle de animación se apaga
- * fuera de pantalla.
+ * fuera de pantalla. Todos siguen al puntero: arrastrar a la derecha lleva
+ * la cara de adelante a la derecha, igual que el globo del inicio.
  */
 
 type Rotacion = {
@@ -119,7 +120,8 @@ function useGiro3d({
       const dy = ev.clientY - g.uy
       g.ux = ev.clientX
       g.uy = ev.clientY
-      g.vy = -dx * 0.45
+      // Positivo = la cara de adelante va hacia donde va el puntero.
+      g.vy = dx * 0.45
       g.y += g.vy
       if (g.tipo !== "touch") {
         g.vx = -dy * 0.45
@@ -298,7 +300,7 @@ const LIMITE_ANATOMIA: [number, number] = [30, 72]
 
 export function AnatomiaWeb({ className }: { className?: string }) {
   const { ref, eventos } = useGiro3d({
-    inicial: { x: 58, y: -38 },
+    inicial: { x: 58, y: 38 },
     auto: 0,
     limiteX: LIMITE_ANATOMIA,
   })
