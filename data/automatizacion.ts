@@ -5,7 +5,8 @@ import type { Pregunta } from "@/data/perfil"
  * artificial" (asistentes de WhatsApp). Los usan la página
  * /automatizacion-de-chats y la sección de la portada (seccion-bots.tsx).
  *
- * Los planes salen de PLANES-Y-PRECIOS.md (versión octubre 2026). Si cambiás
+ * Los planes salen de PLANES-Y-PRECIOS.md del panel (versión noviembre 2026,
+ * con límites por plan y logros). Si cambiás
  * un precio allá, cambialo también acá: el diseño se actualiza solo.
  */
 
@@ -67,7 +68,7 @@ export const planes: Plan[] = [
       "Bienvenida y respuestas fuera de horario",
       "Junta los datos de los clientes interesados",
       "Te pasa la charla cuando hace falta una persona",
-      "Portal propio: conversaciones, contactos y estadísticas básicas",
+      "Portal propio: conversaciones, contactos, estadísticas básicas y logros",
       "Actualizás stock, precios y horarios vos mismo, sin límite",
       "Hasta 2 cambios por mes hechos por mí",
     ],
@@ -121,6 +122,7 @@ export const condicionesPlanes = [
   "Si un mes te pasás de las conversaciones del plan, el asistente no se corta: se suma un paquete de 500 más por USD 10.",
   "Sin permanencia mínima: cancelás avisando con 30 días. La instalación no se reembolsa.",
   "Pagando el año por adelantado, pagás 10 meses y usás 12.",
+  "Premiamos que crezcas: cuando tu asistente llega a 25, 100, 500 y 2.000 conversaciones, desbloqueás de 10% a 50% de descuento en el primer mes del plan siguiente.",
   "¿Más de 8.000 conversaciones o conexión con tu sistema de stock o facturación? Lo cotizamos aparte.",
 ]
 
@@ -204,7 +206,7 @@ export const beneficios = [
   {
     titulo: "Tomás turnos y pedidos",
     texto:
-      "Ofrece horarios, anota pedidos y te los deja listos en tu portal para que los confirmes.",
+      "Ofrece horarios, anota pedidos y te los deja listos en tu portal para que los confirmes. Desde el plan Profesional.",
   },
   {
     titulo: "Te ves profesional",
@@ -266,7 +268,7 @@ export const incluye = [
   {
     titulo: "Portal propio",
     texto:
-      "Ves todas las conversaciones y los contactos interesados, y actualizás stock (“hay / no hay”), precios, horarios y promociones desde el celular. El asistente se entera al instante.",
+      "Ves todas las conversaciones y los contactos interesados, y actualizás stock (“hay / no hay”), precios, horarios y promociones desde el celular. El asistente se entera al instante. También ves cuánto usaste de tu plan, cuántas horas te ahorró y tus logros.",
   },
   {
     titulo: "Monitoreo permanente",
