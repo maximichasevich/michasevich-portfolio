@@ -85,7 +85,8 @@ export const planes: Plan[] = [
     soporte: "Soporte en menos de 8 h hábiles, de lunes a sábado",
     principales: [
       "Todo lo del plan Esencial",
-      "Toma turnos o pedidos, que confirmás desde tu portal",
+      "Agenda de turnos en tu portal: el asistente anota los turnos y los pasás con un clic",
+      "Toma pedidos, que confirmás desde tu portal",
       "Catálogo completo importado desde una planilla",
       "Más memoria: entiende mejor las charlas largas",
       "Estadísticas completas y reporte mensual con recomendaciones",
@@ -106,6 +107,7 @@ export const planes: Plan[] = [
     soporte: "Urgencias en menos de 2 h, de lunes a sábado de 9 a 21",
     principales: [
       "Todo lo del plan Profesional",
+      "Agenda automática: ve tus horarios libres y reserva los turnos solo",
       "Inteligencia artificial avanzada para reclamos y presupuestos",
       "Cambios hechos por mí ilimitados (dentro de lo razonable)",
       "Reunión mensual de seguimiento por videollamada",
@@ -206,7 +208,7 @@ export const beneficios = [
   {
     titulo: "Tomás turnos y pedidos",
     texto:
-      "Ofrece horarios, anota pedidos y te los deja listos en tu portal para que los confirmes. Desde el plan Profesional.",
+      "Anota turnos y pedidos en la agenda de tu portal (desde el plan Profesional). Con el plan Empresa, ve tus horarios libres y reserva solo.",
   },
   {
     titulo: "Te ves profesional",
